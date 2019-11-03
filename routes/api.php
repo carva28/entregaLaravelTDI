@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('jornal','JornalController'); //o modelo tipo post, segundo parametro controlador que gere as rotas
+
+Route::resource('noticia','NoticiaController');
+
+Route::resource('seccao','SeccaoController');

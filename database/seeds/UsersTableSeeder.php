@@ -15,15 +15,17 @@ class UsersTableSeeder extends Seeder
         //
         \App\User::create([
            'name' => 'Administrator',
+           'username' => 'admintdi',
            'email' => 'admin@tdi.pt',
            'password' => Hash::make('admin123'),
            'role_id' => 1,
         ]);
 
         \App\User::create([
-            'name' => 'Manager',
-            'email' => 'manager@tdi.pt',
-            'password' => Hash::make('manager123'),
+            'name' => 'Editor Joao',
+            'username' => 'editortdi',
+            'email' => 'editor@tdi.pt',
+            'password' => Hash::make('editor123'),
             'role_id' => 2,
         ]);
 

@@ -17,11 +17,11 @@ class RolesTableSeeder extends Seeder
         ]);
 
         \App\Role::create([
-            'name' => 'manager',
+            'name' => 'editor',
         ]);
 
         \App\Role::create([
-            'name' => 'user',
+            'name' => 'reporter',
         ]);
     }
 }
