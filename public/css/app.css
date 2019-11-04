@@ -1092,6 +1092,8 @@ pre code {
   .col-md-2 {
     flex: 0 0 16.6666666667%;
     max-width: 16.6666666667%;
+    margin: auto;
+    margin-bottom: 20px;
   }
 
   .col-md-3 {
@@ -1102,6 +1104,7 @@ pre code {
   .col-md-4 {
     flex: 0 0 33.3333333333%;
     max-width: 33.3333333333%;
+    margin: auto;
   }
 
   .col-md-5 {
@@ -10648,3 +10651,7 @@ a:hover {
   text-decoration: none;
 }
 
+.seccao_p{
+  font-size: 20px;
+  text-align: center;
+}   

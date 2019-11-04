@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Seccao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 /**
  * @group Secção management
  * 
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Validator;
  */
 class SeccaoController extends Controller
 {
+
+
     /**
      * Display a listing of the Personas that make cool movies.
      *
@@ -27,8 +30,18 @@ class SeccaoController extends Controller
             'result' => 'OK'
         ];
 
-        return response($response, 200);
+        //return response($response, 200);
+        return view('mostraseca')
+            ->with('seccoes', $seccao);  
     }
+
+    public function form()
+    {   
+        $seccao = Seccao::all();
+        return view('seccaoinsert')
+        ->with('seccoes',$seccao);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -51,8 +64,8 @@ class SeccaoController extends Controller
             'imagem_seccao.required' => 'é necessário ter uma imagem',
         ]);
 
-        
-        
+
+
         if ($validator->fails()) {
             return $validator->errors()->all();
         }
@@ -73,9 +86,18 @@ class SeccaoController extends Controller
             'result' => 'OK'
         ];
 
-        return response($response, 201);
+        //return response($response, 201);
+        return redirect()->route('lista_seccao');
     }
 
+    
+
+    public function formupdate($id)
+    {   
+        $seccao = Seccao::find($id);
+        return view('editseccao')
+        ->with('seccoes',$seccao);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -86,23 +108,23 @@ class SeccaoController extends Controller
     public function update(Request $request, Seccao $seccao)
     {
         $data = $request->all();
-        
+
         $validator = Validator::make($data, [
             'nome_seccao' => 'unique:seccaos|string|max:60',
             'imagem_seccao' => 'image'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $validator->errors()->all();
         }
-        if($request->hasFile('imagem_seccao')){
+        if ($request->hasFile('imagem_seccao')) {
             $file = $request->file('imagem_seccao')->store('images');
             $data['imagem_seccao'] = $file;
         }
-        
+
         $seccao->update($data);
 
-        return response($seccao);
+        return redirect()->route('lista_seccao');
     }
 
     /**

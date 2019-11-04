@@ -14,6 +14,9 @@
 /**
  * Unauthenticated Routes
  */
+
+use App\Http\Controllers\SeccaoController;
+
 Route::get('/', 'MainController@index')->name('index');
 
 /**
@@ -37,3 +40,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backoffice', 'middleware' => 
         Route::resource('user', 'UserController');
     }
 );
+
+/**
+ * API Secções
+ */
+
+Route::get('/lista_seccao','SeccaoController@index')->name('lista_seccao');  
+Route::get('/insert-seccao','SeccaoController@form')->name('seccao-form');  
+Route::post('/insert-seccao','SeccaoController@store')->name('insert-seccao');  
+
+Route::get('/editar-seccao/{seccao}','SeccaoController@formupdate')->name('update-seccao-form');
+Route::post('/editar-seccao','SeccaoController@update')->name('update-seccao');
