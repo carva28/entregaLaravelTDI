@@ -41,17 +41,25 @@ class SeccaoController extends Controller
 
         $validator = Validator::make($data, [
             'nome_seccao' => 'required|unique:seccaos|string|max:60',
+            'imagem_seccao' => 'required|image'
         ], [
             'nome_seccao.required' => 'é necessário ter um nome',
+            'imagem_seccao.required' => 'é necessário ter uma imagem',
         ]);
 
+        
+        
         if ($validator->fails()) {
             return $validator->errors()->all();
         }
 
+        $file = $request->file('imagem_seccao')->store('images');
+        $data['imagem_seccao'] = $file;
+
         $seccao = Seccao::create(
             [
                 'nome_seccao' => $data['nome_seccao'],
+                'imagem_seccao' => $data['imagem_seccao'],
             ]
         );
 
@@ -62,6 +70,35 @@ class SeccaoController extends Controller
         ];
 
         return response($response, 201);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Persona $persona
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Seccao $seccao)
+    {
+        $data = $request->all();
+        
+        $validator = Validator::make($data, [
+            'nome_seccao' => 'unique:seccaos|string|max:60',
+            'imagem_seccao' => 'image'
+        ]);
+
+        if($validator->fails()){
+            return $validator->errors()->all();
+        }
+        if($request->hasFile('imagem_seccao')){
+            $file = $request->file('imagem_seccao')->store('images');
+            $data['imagem_seccao'] = $file;
+        }
+        
+        $seccao->update($data);
+
+        return response($seccao);
     }
 
     /**

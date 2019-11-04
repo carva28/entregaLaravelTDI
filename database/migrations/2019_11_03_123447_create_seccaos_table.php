@@ -16,6 +16,7 @@ class CreateSeccaosTable extends Migration
         Schema::create('seccaos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome_seccao');
+            $table->string('imagem_seccao');
             $table->timestamps();
         });
     }

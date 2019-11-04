@@ -88,7 +88,7 @@ class JornalController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Persona $persona
+     * @param  \App\Jornal $jornal
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Jornal $jornal)

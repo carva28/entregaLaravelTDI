@@ -18,7 +18,7 @@ class NoticiaController extends Controller
     {
         //return Noticia::all();
         $noticia = Noticia::with('jornal')->with('seccao')->get();
-        
+
         $response = [
             'data' => $noticia,
             'message' => 'Listagem de Noticias',
@@ -81,7 +81,7 @@ class NoticiaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Persona  $persona
+     * @param  \App\Noticia  $noticia
      * @return \Illuminate\Http\Response
      */
     public function show(Noticia $noticia)
@@ -93,13 +93,13 @@ class NoticiaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Persona $persona
+     * @param  \App\Noticia $noticia
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Noticia $noticia)
     {
+        //dd('here');
         $data = $request->all();
-
         $validator = Validator::make($data, [
             'titulo_noticia' => 'required|string|max:60',
             'corpo_noticia' => 'required|string|max:255',
@@ -112,10 +112,18 @@ class NoticiaController extends Controller
         if ($validator->fails()) {
             return $validator->errors()->all();
         }
-        
-        $noticia->update($data);
 
-        return response($noticia);
+        
+        // $request->validate([
+        //     'titulo_noticia' => 'required|string|max:60',
+        //     'corpo_noticia' => 'required|string|max:255',
+        //     'jornal_id' => 'required|exists:jornals,id',
+        //     'seccao_id' => 'required|exists:seccaos,id',
+        //     'user_id' => 'required|exists:users,id',
+        // ]);
+
+        $noticia->update($data);
+        return $noticia;
     }
 
     /**

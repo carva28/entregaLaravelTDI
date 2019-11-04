@@ -10,6 +10,6 @@ class Seccao extends Model
     use SoftDeletes;
     
     protected $fillable = [
-        'nome_seccao',
+        'nome_seccao','imagem_seccao'
     ];
 }
