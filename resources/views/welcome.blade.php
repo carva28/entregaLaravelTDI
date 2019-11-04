@@ -91,8 +91,10 @@
                 <a href="{{ route('lista_seccao') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Ver secções do jornal
                 </a>
-                <a href="https://laracasts.com">Laracasts</a>
-                <a href="https://laravel-news.com">News</a>
+                <a href="{{ route('lista_jornais') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                    Ver jornais
+                </a>
+               
             </div>
         </div>
     </div>

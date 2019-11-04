@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Noticia;
+use App\Jornal;
+use App\Seccao;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 /**
@@ -22,14 +25,25 @@ class NoticiaController extends Controller
     {
         //return Noticia::all();
         $noticia = Noticia::with('jornal')->with('seccao')->with('user')->get();
-
+       
         $response = [
             'data' => $noticia,
             'message' => 'Listagem de Noticias',
             'result' => 'OK'
         ];
 
-        return response($response, 200);
+        //return response($response, 200);
+        return view('feednoticia')
+            ->with('noticias', $noticia);  
+    }
+
+    public function form()
+    {   
+        $jornal = Jornal::all();
+        $seccao = Seccao::all();
+        $users = User::all();
+        return view('insertnoticia')
+        ->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);
     }
 
     /**

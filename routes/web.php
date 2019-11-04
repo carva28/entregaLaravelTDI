@@ -57,6 +57,29 @@ Route::delete('/elima-seccao/{seccao}','SeccaoController@destroy')->name('delete
 
 
 /**
- * API Secções
+ * API Jornais
  */
 
+Route::get('/lista_jornais','JornalController@index')->name('lista_jornais');  
+Route::get('/insert-jornal','JornalController@form')->name('jornal-form');  
+Route::post('/insert-jornal','JornalController@store')->name('insert-jornal');  
+
+Route::get('/editar-jornal/{jornal}','JornalController@formupdate')->name('updatejornal-form');
+Route::put('/jornal/{jornal}/edit','JornalController@update')->name('update-jornal'); 
+
+Route::get('/elima-jornal/{jornal}','JornalController@formdelete')->name('delete-jornalform');
+Route::delete('/elima-jornal/{jornal}','JornalController@destroy')->name('delete-jornal');
+
+/**
+ * API noticias
+ */
+
+Route::get('/lista_noticia','NoticiaController@index')->name('lista_noticia');  
+Route::get('/insert-noticia','NoticiaController@form')->name('noticia-form');  
+Route::post('/insert-noticia','NoticiaController@store')->name('insert-noticia');  
+
+Route::get('/editar-noticia/{noticium}','NoticiaController@formupdate')->name('updatenoticia-form');
+Route::put('/jornal/{noticium}/edit','NoticiaController@update')->name('update-noticia'); 
+
+Route::get('/elima-noticia/{noticium}','NoticiaController@formdelete')->name('delete-noticiaform');
+Route::delete('/elima-noticia/{noticium}','NoticiaController@destroy')->name('delete-noticia');

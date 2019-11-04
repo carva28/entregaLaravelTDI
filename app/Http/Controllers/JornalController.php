@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jornal;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,9 +31,17 @@ class JornalController extends Controller
             'result' => 'OK'
         ];
 
-        return response($response, 200);
+        //return response($response, 200);
+        return view('feedjornal')
+            ->with('jornais', $jornal);  
     }
 
+    public function form()
+    {   
+        $user = User::all();
+        return view('inserjornal')
+        ->with('users',$user);
+    }
     /**
      * Store a newly created resource in storage.
      * @bodyParam  é necessário ter um nome
@@ -74,7 +83,8 @@ class JornalController extends Controller
             'result' => 'OK'
         ];
 
-        return response($response, 201);
+        //return response($response, 201);
+        return redirect()->route('lista_jornais');
     }
 
     /**
@@ -86,6 +96,14 @@ class JornalController extends Controller
     public function show(Jornal $jornal)
     {
         return $jornal;
+    }
+
+    public function formupdate($id)
+    {   
+        $jornal = Jornal::find($id);
+        
+        return view('editjornal')
+        ->with('jornais',$jornal);
     }
 
     /**
@@ -112,18 +130,29 @@ class JornalController extends Controller
 
         $jornal->update($data);
 
-        return response($jornal);
+        //return response($jornal);
+        return redirect()->route('lista_jornais');
     }
 
+
+    public function formdelete($id)
+    {   
+        $jornal = Jornal::find($id);
+        $jornal->delete();
+        return redirect()->route('lista_jornais');
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Personas  $personas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jornal $jornal)
+
+
+    public function destroy($id)
     {
+        $jornal = Jornal::find($id);
         $jornal->delete();
-        return "deleted";
+        return redirect()->route('lista_jornais');
     }
 }
