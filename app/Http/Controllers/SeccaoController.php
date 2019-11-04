@@ -110,7 +110,7 @@ class SeccaoController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'nome_seccao' => 'unique:seccaos|string|max:60',
+            'nome_seccao' => 'string|max:60',
             'imagem_seccao' => 'image'
         ]);
 
@@ -118,9 +118,13 @@ class SeccaoController extends Controller
             return $validator->errors()->all();
         }
         if ($request->hasFile('imagem_seccao')) {
+            
             $file = $request->file('imagem_seccao')->store('images');
+           
             $data['imagem_seccao'] = $file;
-        }
+        }   
+
+       
 
         $seccao->update($data);
 

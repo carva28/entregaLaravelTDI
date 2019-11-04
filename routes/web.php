@@ -49,5 +49,5 @@ Route::get('/lista_seccao','SeccaoController@index')->name('lista_seccao');
 Route::get('/insert-seccao','SeccaoController@form')->name('seccao-form');  
 Route::post('/insert-seccao','SeccaoController@store')->name('insert-seccao');  
 
-Route::get('/editar-seccao/{seccao}','SeccaoController@formupdate')->name('update-seccao-form');
-Route::post('/editar-seccao','SeccaoController@update')->name('update-seccao');
+Route::get('/editar-seccao/{seccao}','SeccaoController@formupdate')->name('updateseccao-form');
+Route::put('/seccao/{seccao}/edit','SeccaoController@update')->name('update-seccao'); //<- name é o nome que usamos no blade
