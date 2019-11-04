@@ -98,32 +98,21 @@ class NoticiaController extends Controller
      */
     public function update(Request $request, Noticia $noticia)
     {
-        //dd('here');
         $data = $request->all();
+
         $validator = Validator::make($data, [
             'titulo_noticia' => 'required|string|max:60',
             'corpo_noticia' => 'required|string|max:255',
             'jornal_id' => 'required|exists:jornals,id',
             'seccao_id' => 'required|exists:seccaos,id',
             'user_id' => 'required|exists:users,id',
-
         ]);
-
         if ($validator->fails()) {
             return $validator->errors()->all();
         }
-
-        
-        // $request->validate([
-        //     'titulo_noticia' => 'required|string|max:60',
-        //     'corpo_noticia' => 'required|string|max:255',
-        //     'jornal_id' => 'required|exists:jornals,id',
-        //     'seccao_id' => 'required|exists:seccaos,id',
-        //     'user_id' => 'required|exists:users,id',
-        // ]);
-
         $noticia->update($data);
-        return $noticia;
+
+        return response($noticia);
     }
 
     /**
