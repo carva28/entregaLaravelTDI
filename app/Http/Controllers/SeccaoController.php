@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Seccao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+/**
+ * @group Secção management
+ * 
+ * 
+ */
 class SeccaoController extends Controller
 {
     /**

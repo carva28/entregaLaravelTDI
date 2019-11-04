@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Noticia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+/**
+ * @group Noticia management
+ * 
+ * 
+ */
 
 class NoticiaController extends Controller
 {
@@ -17,7 +21,7 @@ class NoticiaController extends Controller
     public function index()
     {
         //return Noticia::all();
-        $noticia = Noticia::with('jornal')->with('seccao')->get();
+        $noticia = Noticia::with('jornal')->with('seccao')->with('user')->get();
 
         $response = [
             'data' => $noticia,
@@ -96,7 +100,7 @@ class NoticiaController extends Controller
      * @param  \App\Noticia $noticia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Noticia $noticia)
+    public function update(Request $request, Noticia $noticium)
     {
         $data = $request->all();
 
@@ -110,15 +114,15 @@ class NoticiaController extends Controller
         if ($validator->fails()) {
             return $validator->errors()->all();
         }
-        $noticia->update($data);
+        $noticium->update($data);
 
-        return response($noticia);
+        return response($noticium);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Personas  $personas
+     * @param  \App\Noticia  $personas
      * @return \Illuminate\Http\Response
      */
     public function destroy(Noticia $noticia)

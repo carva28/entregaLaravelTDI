@@ -6,12 +6,16 @@ use App\Jornal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
+/**
+ * @group Jornal management
+ * 
+ * 
+ */
 
 class JornalController extends Controller
 {
     /**
-     * Display a listing of the Personas that make cool movies.
+     * Display a listing of the Jornals that made by cool journalists.
      *
      * @return \Illuminate\Http\Response
      */
