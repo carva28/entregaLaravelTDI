@@ -2,13 +2,18 @@
 
 @section('content')
 <div class="container">
-    <div class="col-md-2 col-md-offset-5">
-        <a href="{{ route('insert-seccao') }}" class="btn btn-xs btn-info pull-right">
 
-            Submeter nova seccção
-
+    <div class="col-sm">
+        <a href="/" class="btn btn-xs btn-info pull-right">
+            Home
         </a>
-
+    </div>
+    <div class="col-sm">
+        <div class="col-md-2 col-md-offset-5">
+            <a href="{{ route('insert-seccao') }}" class="btnsubmeterseccao btn btn-xs btn-info pull-right">
+                Submeter nova seccção
+            </a>
+        </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -28,9 +33,19 @@
 
                         <div class="col-md-4">
                             <img class="img-fluid" src="/uploads/{{$seccao->imagem_seccao}}" />
-                            <a href="{{ url('editar-seccao/'.$seccao->id) }}" class="btn btn-xs btn-info pull-right">
-                                Editar Secção
-                            </a>
+                            <div class="row2">
+                                <div class="col-sm">
+                                    <a href="{{ url('editar-seccao/'.$seccao->id) }}" class="btn btn-xs btn-info pull-right">
+                                        Editar Secção
+                                    </a>
+                                </div>
+                                <div class="col-sm">
+                                    <a class="btn_elimina_seccao" href="{{ url('elima-seccao/'.$seccao->id) }}" class="btn btn-xs btn-info pull-right">
+                                        Eliminar Secção
+                                    </a>
+                                </div>
+
+                            </div>
                         </div>
 
 

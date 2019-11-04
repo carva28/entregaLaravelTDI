@@ -2,12 +2,27 @@
 
 @section('content')
 <div class="container">
+    <div class="col-md-2 col-md-offset-5">
+        <a href="{{ route('lista_seccao') }}" class="btn btn-xs btn-info pull-right">
+
+            Voltar lista seccção
+
+        </a>
+
+    </div>
+    <h2>Lista de Secções existentes</h2>
+    <ul class="list-group2">
+        
     @foreach($seccoes as $seccao)
-    <ul class="list-group">
-        <li class="list-group-item">Secção:<p>{{ $seccao->nome_seccao }}</p>
+    
+
+        <li class="list-group-item">
+            <img class="img-fluid_inserir" src="/uploads/{{$seccao->imagem_seccao}}" />
+            <p>Secção:{{ $seccao->nome_seccao }}</p>
         </li>
-    </ul>
+   
     @endforeach
+    </ul>
     <div class="row justify-content-center">
 
         <div class="col-md-8">

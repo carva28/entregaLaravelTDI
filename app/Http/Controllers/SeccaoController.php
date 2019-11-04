@@ -137,9 +137,18 @@ class SeccaoController extends Controller
      * @param  \App\Personas  $personas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seccao $seccao)
-    {
+    public function formdelete($id)
+    {   
+        $seccao = Seccao::find($id);
         $seccao->delete();
-        return "deleted";
+        return redirect()->route('lista_seccao');
     }
+
+    public function destroy($id)
+    {   
+        $seccao = Seccao::find($id);
+        $seccao->delete();
+        return redirect()->route('lista_seccao');
+    }
+
 }

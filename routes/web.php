@@ -50,4 +50,13 @@ Route::get('/insert-seccao','SeccaoController@form')->name('seccao-form');
 Route::post('/insert-seccao','SeccaoController@store')->name('insert-seccao');  
 
 Route::get('/editar-seccao/{seccao}','SeccaoController@formupdate')->name('updateseccao-form');
-Route::put('/seccao/{seccao}/edit','SeccaoController@update')->name('update-seccao'); //<- name é o nome que usamos no blade
+Route::put('/seccao/{seccao}/edit','SeccaoController@update')->name('update-seccao'); //<- name é o nome que usamos no blade na action
+
+Route::get('/elima-seccao/{seccao}','SeccaoController@formdelete')->name('delete-secform');
+Route::delete('/elima-seccao/{seccao}','SeccaoController@destroy')->name('delete-seccao');
+
+
+/**
+ * API Secções
+ */
+

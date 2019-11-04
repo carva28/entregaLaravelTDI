@@ -2,7 +2,14 @@
 
 @section('content')
 <div class="container">
+    <div class="col-md-2 col-md-offset-5">
+        <a href="{{ route('lista_seccao') }}" class="btn btn-xs btn-info pull-right">
 
+            Voltar página seccção
+
+        </a>
+
+    </div>
 
     <div class="row justify-content-center">
 
@@ -45,9 +52,13 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btnsubmeterseccao btn btn-primary">
                                     Submeter
                                 </button>
+
+                                <a href="{{ route('lista_seccao') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                                    Cancelar
+                                </a>
                             </div>
                         </div>
                     </form>
