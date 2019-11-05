@@ -91,3 +91,16 @@ Route::delete('/elima-noticia/{noticium}','NoticiaController@destroy')->name('de
 
 Route::get('/listarnewsjornal/{jornal}','NoticiaController@juncao')->name('lista_noticia_jornal');  
 
+/**
+ * API Conteudos
+ */
+
+Route::get('/lista_conteudo','ConteudoController@index')->name('lista_conteudo');  
+Route::get('/insert-conteudo','ConteudoController@form')->name('conteudo-form');  
+Route::post('/insert-conteudo','ConteudoController@store')->name('insert-conteudo');  
+
+Route::get('/editar-conteudo/{conteudo}','ConteudoController@formupdate')->name('updateconteudo-form');
+Route::put('/conteudo/{conteudo}/edit','ConteudoController@update')->name('update-conteudo'); 
+
+Route::get('/elima-conteudo/{conteudo}','ConteudoController@formdelete')->name('delete-conteudoform');
+Route::delete('/elima-conteudo/{conteudo}','ConteudoController@destroy')->name('delete-conteudo');

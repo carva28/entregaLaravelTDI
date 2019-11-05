@@ -6,27 +6,32 @@ use App\Noticia;
 use App\Jornal;
 use App\Seccao;
 use App\User;
+use App\Conteudo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+
 /**
- * @group Noticia management
+ * @group API da Noticia
  * 
- * 
+ *  APIs para gerir notícias e ver as respetivas secções  e jornais
  */
 
 class NoticiaController extends Controller
 {
     /**
-     * Display a listing of the Personas that make cool movies.
-     *
+     * Apresentação das notícias realizadas por grandes repórteres.
+     * Interpretação de quem fez a notícia, para que jornal é, e qual a secção que se destina
+     * HTTP Response
+     * @bodyParam 200 integer OK -> mostra a informação
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //return Noticia::all();
         $noticia = Noticia::with('jornal')->with('seccao')->with('user')->get();
-       
+
         $response = [
             'data' => $noticia,
             'message' => 'Listagem de Noticias',
@@ -34,24 +39,35 @@ class NoticiaController extends Controller
         ];
 
         //return response($response, 200);
-        return view('feednoticia')
-            ->with('noticias', $noticia);  
+
+        if ($response['result'] == 'OK') {
+            return view('feednoticia')
+                ->with('noticias', $noticia);
+        } else {
+            return 'Ocorreu um erro';
+        }
     }
 
     public function form()
-    {   
+    {
         $jornal = Jornal::all();
         $seccao = Seccao::all();
         $users = User::all();
         return view('insertnoticia')
-        ->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);
+            ->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @bodyParam  é necessário ter um nome
-     * @bodyParam  é necessário ter descrição ter descrição
-     * @bodyParam  é necessário saber quem é o responsável do Jornal
+     * Inserir uma notícia na Base de dados.
+     * Faz redirect da rota se armazenar os dados corretamente esta 
+     * verificação é realizada pelo http code 201
+     * 
+     * @bodyParam  titulo_noticia string required necessário ter um nome para a notícia
+     * @bodyParam  corpo_noticia string required necessário ter um corpo de notícia
+     * @bodyParam  jornal_id integer required necessário saber a que Jornal pertence esta notícia
+     * @bodyParam  seccao_id integer required necessário saber a secção da notícia
+     * @bodyParam  user_id integer required necessário saber quem é o repórter do Jornal
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -95,12 +111,14 @@ class NoticiaController extends Controller
         ];
 
         //return response($response, 201);
-        return redirect()->route('lista_noticia');
+        return redirect()->route('lista_noticia', 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
+/**
+     * Apresentação de uma noticia específica 
+     * 
+     * Apresentar uma notíca com base no ID
+     * 
      * @param  \App\Noticia  $noticia
      * @return \Illuminate\Http\Response
      */
@@ -108,29 +126,36 @@ class NoticiaController extends Controller
     {
         return $noticia;
     }
-
+    
     public function formupdate($id)
-    {   
+    {
         $noticia = Noticia::find($id);
         $jornal = Jornal::all();
         $seccao = Seccao::all();
         $users = User::all();
-        
+
         return view('editnoticia')
-        ->with('noticias',$noticia)
-        ->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);
+            ->with('noticias', $noticia)
+            ->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * Atualização de uma noticia específica 
+     *  Ao editar uma notícia presente no feed, é enviado o ID especifico do mesmo, nessa 
+     * ligação, a função formupdate irá associar o id da notícia apresentando toda a informação 
+     * sobre a mesma
+     * @queryParam titulo_noticia required Título da notícia
+     * @queryParam corpo_noticia required Corpo da notícia
+     * @queryParam jornal_id required Jornal da respetiva notícia
+     * @queryParam seccao_id required Secção da respetiva notícia
+     * @queryParam user_id required Repórter da notícia
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Noticia $noticia
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function update(Request $request, Noticia $noticium)
     {
-        
+
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -146,36 +171,53 @@ class NoticiaController extends Controller
         $noticium->update($data);
 
         //return response($noticium);
+        return redirect()->route('lista_noticia', 200);
+    }
+
+   
+    public function formdelete($id)
+    {
+        $noticia = Noticia::find($id);
+        $noticia->delete();
+        return redirect()->route('lista_noticia');
+    }
+ /**
+     * Eliminar uma notícia específica
+     * 
+     * Ao clique no botão de eliminar notícia, o ID dessa mesma irá  
+     * ser eliminado da base de dados
+     *
+     * @param  \App\Noticia  $noticias
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $noticia = Noticia::find($id);
+        $noticia->delete();
         return redirect()->route('lista_noticia');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * ##Aceder às notícias do respetivo Jornal
+     * Ao editar uma noticia no feed, enviamos o ID especifico da notícia, com essa 
+     * 
      *
-     * @param  \App\Noticia  $personas
-     * @return \Illuminate\Http\Response
+     * 
+     * 
      */
-    public function formdelete($id)
-    {   
-        $noticia = Noticia::find($id);
-        $noticia->delete();
-        return redirect()->route('lista_noticia');
-    }
-
-    public function destroy($id)
-    {   
-        $noticia = Noticia::find($id);
-        $noticia->delete();
-        return redirect()->route('lista_noticia');
-    }
 
     public function juncao($id)
-    {   
-        $noticia = DB::table('noticias')->where('jornal_id',$id)->get();
+    {
+        $noticia = DB::table('noticias')->where('jornal_id', $id)->get();
         $jornal = Jornal::find($id);
         $seccao = Seccao::all();
         $users = User::all();
+        $conteudo = Conteudo::with('noticia')->get();
         return view('jornalnews')
-            ->with('noticias', $noticia)->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);
+            ->with('noticias', $noticia)
+            ->with('jornais', $jornal)
+            ->with('seccaos', $seccao)
+            ->with('users', $users)
+            ->with('conteudos', $conteudo);
     }
 }

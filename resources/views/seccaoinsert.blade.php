@@ -34,7 +34,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name_persona" class="col-md-4 col-form-label text-md-right">Nome da Secção</label>
+                            <label for="nome_seccao" class="col-md-4 col-form-label text-md-right">Nome da Secção</label>
 
                             <div class="col-md-6">
                                 <input id="nome_seccao" type="text" class="form-control @error('nome_seccao') is-invalid @enderror" name="nome_seccao" value="{{ old('nome_seccao') }}" required autocomplete="nome_seccao" autofocus>

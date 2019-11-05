@@ -22,3 +22,5 @@ Route::resource('jornal','JornalController'); //o modelo tipo post, segundo para
 Route::resource('noticia','NoticiaController');
 
 Route::resource('seccao','SeccaoController');
+
+Route::resource('conteudo','ConteudoController');

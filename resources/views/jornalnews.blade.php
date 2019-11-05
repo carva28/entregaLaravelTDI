@@ -3,13 +3,14 @@
 @section('content')
 <div class="container">
 
-   
-   
+
+
     <div class="col-sm">
         <a href="/" class="btn btn-xs btn-info pull-right">
             Home
         </a>
     </div>
+
 
     <h2 style="text-align:center">{{$jornais->name_jornal}}</h2>
 
@@ -49,18 +50,69 @@
                             </p>
                             @endif
                             @endforeach
-                            
 
                         </div>
 
 
 
                     </div>
+
+                    @foreach($conteudos as $conteudo)
+                    @if($noticia->id===$conteudo->noticia_id)
+
+                    <div class="container">
+                        <div class="row justify-content-center">
+
+
+                            @if(pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == 'mpga' ||
+                            pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == 'mp3')
+                            
+                                <audio controls>
+                                    <source src="/uploads/{{$conteudo->ficheiro_conteudo}}" type="audio/mpeg">
+                                    Your browser does not support the audio tag.
+                                </audio>
+                            
+                            @endif
+
+
+                            @if(pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "png" ||
+                            pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "gif" ||
+                            pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "jpg" ||
+                            pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "jpeg")
+                            
+                                <img class="img-fluid-jornalnews" src="/uploads/{{$conteudo->ficheiro_conteudo}}" />
+                            
+                            @endif
+
+
+                            @if(pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "mp4" ||
+                            pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "avi")
+                            
+                                <video width="320" height="240" controls>
+                                    <source src="/uploads/{{$conteudo->ficheiro_conteudo}}" type="video/mp4">
+
+                                    Your browser does not support the video tag.
+                                </video>
+                            
+                            @endif
+
+                            @endif
+                            @endforeach
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div>
+                    </div>
                 </div>
                 @endforeach
 
             </div>
         </div>
-    </div>
-</div>
-@endsection
+        @endsection

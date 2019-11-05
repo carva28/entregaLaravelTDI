@@ -84,7 +84,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                Laravel TDI TESTE
+                Notícia App
             </div>
 
             <div class="links">
@@ -96,6 +96,9 @@
                 </a>
                 <a href="{{ route('lista_noticia') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Ver notícias
+                </a>
+                <a href="{{ route('lista_conteudo') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                    Ver conteudos
                 </a>
             </div>
         </div>

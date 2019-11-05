@@ -23,7 +23,7 @@
                         @method('put')
                         <input type="hidden" name="_method" value="put">
                         <div class="form-group row">
-                            <label for="name_persona" class="col-md-4 col-form-label text-md-right">Nome da Secção</label>
+                            <label for="nome_seccao" class="col-md-4 col-form-label text-md-right">Nome da Secção</label>
 
                             <div class="col-md-6">
                                 <img class="img-fluid" src="/uploads/{{$seccoes->imagem_seccao}}" />

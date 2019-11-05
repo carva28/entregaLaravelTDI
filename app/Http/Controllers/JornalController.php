@@ -9,15 +9,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * @group Jornal management
+ * @group API do Jornal 
  * 
+ * APIs para gerir jornais
  * 
  */
 
 class JornalController extends Controller
 {
     /**
-     * Display a listing of the Jornals that made by cool journalists.
+     * Apresentação dos jornais associados aos editores.
+     * Interpretação de quem pertence o jornal
+     * HTTP Response
+     * @bodyParam 200 integer OK -> mostra a informação
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,21 +37,29 @@ class JornalController extends Controller
         ];
 
         //return response($response, 200);
-        return view('feedjornal')
-            ->with('jornais', $jornal);  
+        
+        if ($response['result'] == 'OK') {
+            return view('feedjornal')
+                ->with('jornais', $jornal);
+        } else {
+            return 'Ocorreu um erro';
+        }
     }
 
     public function form()
-    {   
+    {
         $user = User::all();
         return view('inserjornal')
-        ->with('users',$user);
+            ->with('users', $user);
     }
     /**
-     * Store a newly created resource in storage.
-     * @bodyParam  é necessário ter um nome
-     * @bodyParam  é necessário ter descrição ter descrição
-     * @bodyParam  é necessário saber quem é o responsável do Jornal
+     * Inserir uma notícia na Base de dados.
+     * Faz redirect da rota se armazenar os dados corretamente esta 
+     * verificação é realizada pelo http code 201
+     * 
+     * @bodyParam  name_jornal string required Dar um nome criativo ao Jornal
+     * @bodyParam  description string required necessário ter uma descrição associada ao Jornal
+     * @bodyParam  user_id integer required necessário saber a quem pertence o jornal
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -57,7 +69,7 @@ class JornalController extends Controller
 
 
         $validator = Validator::make($data, [
-            'name_jornal' => 'required|unique:jornals|string|max:60', //campo que é obrigatório ser preenchido | para validar só strings e com máximo de 255 caracteres; unique permite ser único:nome_da_tabela
+            'name_jornal' => 'required|unique:jornals|string|max:60', 
             'description' => 'required|string|max:255',
             'user_id' => 'required|exists:users,id',
         ], [
@@ -85,13 +97,16 @@ class JornalController extends Controller
         ];
 
         //return response($response, 201);
-        return redirect()->route('lista_jornais');
+        return redirect()->route('lista_jornais', 201);
     }
 
     /**
-     * Display the specified resource.
+     * Apresentação de um jornal específicao
+     * 
+     * Apresenta um jornal tendo por base no ID
+     * 
      *
-     * @param  \App\Persona  $persona
+     * @param  \App\Jornal  $jornal
      * @return \Illuminate\Http\Response
      */
     public function show(Jornal $jornal)
@@ -100,16 +115,23 @@ class JornalController extends Controller
     }
 
     public function formupdate($id)
-    {   
+    {
         $jornal = Jornal::find($id);
-        
+
         return view('editjornal')
-        ->with('jornais',$jornal);
+            ->with('jornais', $jornal);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Atualização de um jornal específico
+     * Ao editar um jornal presente no feed, é enviado o ID especifico do mesmo, nessa 
+     * ligação, a função formupdate irá associar o id do jornal apresentando toda a informação 
+     * sobre o mesmo
+     * @queryParam name_jornal required Título do jornal
+     * @queryParam description required Descrição sobre o jornal
+     * @queryParam user_id required Editor do jornal
      *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Jornal $jornal
      * @return \Illuminate\Http\Response
@@ -132,20 +154,23 @@ class JornalController extends Controller
         $jornal->update($data);
 
         //return response($jornal);
-        return redirect()->route('lista_jornais');
+        return redirect()->route('lista_jornais', 200);
     }
 
 
     public function formdelete($id)
-    {   
+    {
         $jornal = Jornal::find($id);
         $jornal->delete();
-        return redirect()->route('lista_jornais');
+        return redirect()->route('lista_jornais', 200);
     }
     /**
-     * Remove the specified resource from storage.
+     * Eliminar um jornal específico
+     * 
+     * Ao clique no botão de eliminar jornal, o ID desse mesmo irá  
+     * ser eliminado na base de dados
      *
-     * @param  \App\Personas  $personas
+     * @param  \App\Jornal  $jornal
      * @return \Illuminate\Http\Response
      */
 
@@ -154,8 +179,6 @@ class JornalController extends Controller
     {
         $jornal = Jornal::find($id);
         $jornal->delete();
-        return redirect()->route('lista_jornais');
+        return redirect()->route('lista_jornais', 200);
     }
-
-    
 }
