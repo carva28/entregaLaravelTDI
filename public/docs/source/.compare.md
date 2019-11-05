@@ -35,7 +35,7 @@ HTTP Response
 ```bash
 curl -X GET -G "http://localhost/api/noticia" \
     -H "Content-Type: application/json" \
-    -d '{"200":2}'
+    -d '{"200":4}'
 
 ```
 
@@ -48,7 +48,7 @@ let headers = {
 }
 
 let body = {
-    "200": 2
+    "200": 4
 }
 
 fetch(url, {
@@ -89,7 +89,7 @@ verificação é realizada pelo http code 201
 ```bash
 curl -X POST "http://localhost/api/noticia" \
     -H "Content-Type: application/json" \
-    -d '{"titulo_noticia":"sit","corpo_noticia":"facilis","jornal_id":16,"seccao_id":9,"user_id":11}'
+    -d '{"titulo_noticia":"voluptas","corpo_noticia":"at","jornal_id":12,"seccao_id":11,"user_id":20}'
 
 ```
 
@@ -102,11 +102,11 @@ let headers = {
 }
 
 let body = {
-    "titulo_noticia": "sit",
-    "corpo_noticia": "facilis",
-    "jornal_id": 16,
-    "seccao_id": 9,
-    "user_id": 11
+    "titulo_noticia": "voluptas",
+    "corpo_noticia": "at",
+    "jornal_id": 12,
+    "seccao_id": 11,
+    "user_id": 20
 }
 
 fetch(url, {
@@ -184,18 +184,18 @@ sobre a mesma
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/noticia/1?titulo_noticia=tenetur&corpo_noticia=fugiat&jornal_id=hic&seccao_id=sint&user_id=rerum" 
+curl -X PUT "http://localhost/api/noticia/1?titulo_noticia=hic&corpo_noticia=vero&jornal_id=quia&seccao_id=totam&user_id=quidem" 
 ```
 
 ```javascript
 const url = new URL("http://localhost/api/noticia/1");
 
     let params = {
-            "titulo_noticia": "tenetur",
-            "corpo_noticia": "fugiat",
-            "jornal_id": "hic",
-            "seccao_id": "sint",
-            "user_id": "rerum",
+            "titulo_noticia": "hic",
+            "corpo_noticia": "vero",
+            "jornal_id": "quia",
+            "seccao_id": "totam",
+            "user_id": "quidem",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -281,7 +281,7 @@ HTTP Response
 ```bash
 curl -X GET -G "http://localhost/api/seccao" \
     -H "Content-Type: application/json" \
-    -d '{"200":7}'
+    -d '{"200":19}'
 
 ```
 
@@ -294,7 +294,7 @@ let headers = {
 }
 
 let body = {
-    "200": 7
+    "200": 19
 }
 
 fetch(url, {
@@ -335,7 +335,7 @@ pelo http code 201
 ```bash
 curl -X POST "http://localhost/api/seccao" \
     -H "Content-Type: application/json" \
-    -d '{"nome_seccao":"corporis","imagem_seccao":"expedita"}'
+    -d '{"nome_seccao":"quia","imagem_seccao":"expedita"}'
 
 ```
 
@@ -348,7 +348,7 @@ let headers = {
 }
 
 let body = {
-    "nome_seccao": "corporis",
+    "nome_seccao": "quia",
     "imagem_seccao": "expedita"
 }
 
@@ -384,15 +384,15 @@ sobre a mesma
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/seccao/1?nome_seccao=modi&imagem_seccao=dolorem" 
+curl -X PUT "http://localhost/api/seccao/1?nome_seccao=nisi&imagem_seccao=molestiae" 
 ```
 
 ```javascript
 const url = new URL("http://localhost/api/seccao/1");
 
     let params = {
-            "nome_seccao": "modi",
-            "imagem_seccao": "dolorem",
+            "nome_seccao": "nisi",
+            "imagem_seccao": "molestiae",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -476,7 +476,7 @@ HTTP Response
 ```bash
 curl -X GET -G "http://localhost/api/conteudo" \
     -H "Content-Type: application/json" \
-    -d '{"200":20}'
+    -d '{"200":6}'
 
 ```
 
@@ -489,7 +489,7 @@ let headers = {
 }
 
 let body = {
-    "200": 20
+    "200": 6
 }
 
 fetch(url, {
@@ -530,7 +530,7 @@ esta verificação é realizada pelo http code 201
 ```bash
 curl -X POST "http://localhost/api/conteudo" \
     -H "Content-Type: application/json" \
-    -d '{"tipo_conteudo":"corporis","ficheiro_conteudo":"non","noticia_id":8,"user_id":11}'
+    -d '{"tipo_conteudo":"quidem","ficheiro_conteudo":"laudantium","noticia_id":18,"user_id":15}'
 
 ```
 
@@ -543,10 +543,10 @@ let headers = {
 }
 
 let body = {
-    "tipo_conteudo": "corporis",
-    "ficheiro_conteudo": "non",
-    "noticia_id": 8,
-    "user_id": 11
+    "tipo_conteudo": "quidem",
+    "ficheiro_conteudo": "laudantium",
+    "noticia_id": 18,
+    "user_id": 15
 }
 
 fetch(url, {
@@ -623,17 +623,17 @@ sobre o conteúdo
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/conteudo/1?tipo_conteudo=sint&ficheiro_conteudo=minima&noticia_id=consequuntur&user_id=quibusdam" 
+curl -X PUT "http://localhost/api/conteudo/1?tipo_conteudo=amet&ficheiro_conteudo=officiis&noticia_id=et&user_id=nulla" 
 ```
 
 ```javascript
 const url = new URL("http://localhost/api/conteudo/1");
 
     let params = {
-            "tipo_conteudo": "sint",
-            "ficheiro_conteudo": "minima",
-            "noticia_id": "consequuntur",
-            "user_id": "quibusdam",
+            "tipo_conteudo": "amet",
+            "ficheiro_conteudo": "officiis",
+            "noticia_id": "et",
+            "user_id": "nulla",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -719,7 +719,7 @@ HTTP Response
 ```bash
 curl -X GET -G "http://localhost/api/jornal" \
     -H "Content-Type: application/json" \
-    -d '{"200":12}'
+    -d '{"200":13}'
 
 ```
 
@@ -732,7 +732,7 @@ let headers = {
 }
 
 let body = {
-    "200": 12
+    "200": 13
 }
 
 fetch(url, {
@@ -773,7 +773,7 @@ verificação é realizada pelo http code 201
 ```bash
 curl -X POST "http://localhost/api/jornal" \
     -H "Content-Type: application/json" \
-    -d '{"name_jornal":"adipisci","description":"dolore","user_id":8}'
+    -d '{"name_jornal":"nesciunt","description":"non","user_id":20}'
 
 ```
 
@@ -786,9 +786,9 @@ let headers = {
 }
 
 let body = {
-    "name_jornal": "adipisci",
-    "description": "dolore",
-    "user_id": 8
+    "name_jornal": "nesciunt",
+    "description": "non",
+    "user_id": 20
 }
 
 fetch(url, {
@@ -872,16 +872,16 @@ sobre o mesmo
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/jornal/1?name_jornal=at&description=provident&user_id=voluptas" 
+curl -X PUT "http://localhost/api/jornal/1?name_jornal=qui&description=officiis&user_id=nihil" 
 ```
 
 ```javascript
 const url = new URL("http://localhost/api/jornal/1");
 
     let params = {
-            "name_jornal": "at",
-            "description": "provident",
-            "user_id": "voluptas",
+            "name_jornal": "qui",
+            "description": "officiis",
+            "user_id": "nihil",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
