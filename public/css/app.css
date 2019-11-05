@@ -9038,3 +9038,18 @@ a:hover {
 .img-fluid-table{
   width:10%;
 }
+
+.input_radio_seccao{
+  margin-bottom: 20px;
+}
+
+.img-fluid-profile{
+  width:30%;
+}
+
+.user_p{
+  position: relative;
+  top: -40px;
+  left:80px;
+  font-size: 20px;
+}

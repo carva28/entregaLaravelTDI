@@ -8,6 +8,7 @@ use App\Seccao;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 /**
  * @group Noticia management
  * 
@@ -93,7 +94,8 @@ class NoticiaController extends Controller
             'result' => 'OK'
         ];
 
-        return response($response, 201);
+        //return response($response, 201);
+        return redirect()->route('lista_noticia');
     }
 
     /**
@@ -107,6 +109,18 @@ class NoticiaController extends Controller
         return $noticia;
     }
 
+    public function formupdate($id)
+    {   
+        $noticia = Noticia::find($id);
+        $jornal = Jornal::all();
+        $seccao = Seccao::all();
+        $users = User::all();
+        
+        return view('editnoticia')
+        ->with('noticias',$noticia)
+        ->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -116,6 +130,7 @@ class NoticiaController extends Controller
      */
     public function update(Request $request, Noticia $noticium)
     {
+        
         $data = $request->all();
 
         $validator = Validator::make($data, [
@@ -130,7 +145,8 @@ class NoticiaController extends Controller
         }
         $noticium->update($data);
 
-        return response($noticium);
+        //return response($noticium);
+        return redirect()->route('lista_noticia');
     }
 
     /**
@@ -139,9 +155,27 @@ class NoticiaController extends Controller
      * @param  \App\Noticia  $personas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Noticia $noticia)
-    {
+    public function formdelete($id)
+    {   
+        $noticia = Noticia::find($id);
         $noticia->delete();
-        return "deleted";
+        return redirect()->route('lista_noticia');
+    }
+
+    public function destroy($id)
+    {   
+        $noticia = Noticia::find($id);
+        $noticia->delete();
+        return redirect()->route('lista_noticia');
+    }
+
+    public function juncao($id)
+    {   
+        $noticia = DB::table('noticias')->where('jornal_id',$id)->get();
+        $jornal = Jornal::find($id);
+        $seccao = Seccao::all();
+        $users = User::all();
+        return view('jornalnews')
+            ->with('noticias', $noticia)->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);
     }
 }

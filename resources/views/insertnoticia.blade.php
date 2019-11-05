@@ -63,11 +63,12 @@
                             <label for="seccao_id" class="col-md-4 col-form-label text-md-right">Secção</label>
 
                             <div class="col-md-6">
-                                <select name="seccao_id">
+                                
                                     @foreach($seccaos as $seccao)
-                                    <option value="{{$seccao->id}}">{{$seccao->nome_seccao}}</option>
+                                    <input class="input_radio_seccao" type="radio" name="seccao_id" value="{{$seccao->id}}" checked> <img class="img-fluid_inserir" src="/uploads/{{$seccao->imagem_seccao}}" /> {{$seccao->nome_seccao}} <br>
+                                    
                                     @endforeach
-                                </select>
+                                
 
 
                                 @error('seccao_id')

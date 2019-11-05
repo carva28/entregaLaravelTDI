@@ -94,7 +94,9 @@
                 <a href="{{ route('lista_jornais') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Ver jornais
                 </a>
-               
+                <a href="{{ route('lista_noticia') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                    Ver notícias
+                </a>
             </div>
         </div>
     </div>

@@ -79,7 +79,15 @@ Route::get('/insert-noticia','NoticiaController@form')->name('noticia-form');
 Route::post('/insert-noticia','NoticiaController@store')->name('insert-noticia');  
 
 Route::get('/editar-noticia/{noticium}','NoticiaController@formupdate')->name('updatenoticia-form');
-Route::put('/jornal/{noticium}/edit','NoticiaController@update')->name('update-noticia'); 
+Route::put('/noticias/{noticium}/edit','NoticiaController@update')->name('update-noticia'); 
 
 Route::get('/elima-noticia/{noticium}','NoticiaController@formdelete')->name('delete-noticiaform');
 Route::delete('/elima-noticia/{noticium}','NoticiaController@destroy')->name('delete-noticia');
+
+
+/**
+ * API Noticas de cada Jornal
+ */
+
+Route::get('/listarnewsjornal/{jornal}','NoticiaController@juncao')->name('lista_noticia_jornal');  
+

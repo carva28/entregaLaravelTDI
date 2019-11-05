@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jornal;
 use App\User;
+use App\Noticia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -118,7 +119,7 @@ class JornalController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'name_jornal' => 'required|unique:jornals|string|max:60',
+            'name_jornal' => 'required|string|max:60',
             'description' => 'required|string|max:255',
             'user_id' => 'required|exists:users,id',
 
@@ -155,4 +156,6 @@ class JornalController extends Controller
         $jornal->delete();
         return redirect()->route('lista_jornais');
     }
+
+    
 }

@@ -39,7 +39,7 @@
                                     <p>Editor: <b>{{ $jornal->user->username }}</b></p>
                                 </li>
                             </ul>
-                            <a href="" class="btn_vernoticias btn btn-xs btn-info pull-right">
+                            <a href="{{ url('listarnewsjornal/'.$jornal->id) }}" class="btn_vernoticias btn btn-xs btn-info pull-right">
                                         Ver notícias
                                     </a>
                             <div class="row2">

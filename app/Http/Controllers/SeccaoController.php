@@ -97,6 +97,7 @@ class SeccaoController extends Controller
         $seccao = Seccao::find($id);
         return view('editseccao')
         ->with('seccoes',$seccao);
+        
     }
     /**
      * Update the specified resource in storage.
