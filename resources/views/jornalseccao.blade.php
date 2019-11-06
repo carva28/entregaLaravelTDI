@@ -4,14 +4,14 @@
 <div class="container">
 
     <nav class="navbar_jornal_news navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url('listarnewsjornal/'.$jornais->id) }}">{{$jornais->name_jornal}}</a>
+    <a class="navbar-brand" href="{{ url('listarnewsjornal/'.$jornais->id) }}">{{$jornais->name_jornal}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                @foreach($secjornals as $secjornal)
+            @foreach($secjornals as $secjornal)
                 @foreach($seccaos as $seccao)
                 @if($seccao->id === $secjornal->seccao_id)
                 <a class="nav-item nav-link" href="{{ url('lista_noticia_seccao/'.$seccao->id.'/'.$jornais->id) }}">{{$seccao->nome_seccao}}</a>
@@ -37,7 +37,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                @foreach($noticias as $noticia)
+                @foreach($noticiasseccao as $noticia)
 
 
                 <div class="card-header">

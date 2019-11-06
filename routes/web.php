@@ -91,6 +91,7 @@ Route::delete('/elima-noticia/{noticium}','NoticiaController@destroy')->name('de
 
 Route::get('/listarnewsjornal/{jornal}','NoticiaController@juncao')->name('lista_noticia_jornal');  
 
+Route::get('/lista_noticia_seccao/{seccao}/{jornal}','NoticiaController@jornalseccao')->name('lista_noticia_seccao');  
 /**
  * API Conteudos
  */

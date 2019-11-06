@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-    <div class="col-sm">
+    <div class="row">
         <a href="/" class="btn btn-xs btn-info pull-right">
             Home
         </a>

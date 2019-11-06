@@ -114,7 +114,7 @@ class NoticiaController extends Controller
         return redirect()->route('lista_noticia', 201);
     }
 
-/**
+    /**
      * Apresentação de uma noticia específica 
      * 
      * Apresentar uma notíca com base no ID
@@ -126,7 +126,7 @@ class NoticiaController extends Controller
     {
         return $noticia;
     }
-    
+
     public function formupdate($id)
     {
         $noticia = Noticia::find($id);
@@ -174,14 +174,14 @@ class NoticiaController extends Controller
         return redirect()->route('lista_noticia', 200);
     }
 
-   
+
     public function formdelete($id)
     {
         $noticia = Noticia::find($id);
         $noticia->delete();
         return redirect()->route('lista_noticia');
     }
- /**
+    /**
      * Eliminar uma notícia específica
      * 
      * Ao clique no botão de eliminar notícia, o ID dessa mesma irá  
@@ -209,6 +209,8 @@ class NoticiaController extends Controller
     public function juncao($id)
     {
         $noticia = DB::table('noticias')->where('jornal_id', $id)->get();
+        $secjornal = Noticia::with('seccao')->select('seccao_id')->distinct()->where('jornal_id', $id)->get();
+
         $jornal = Jornal::find($id);
         $seccao = Seccao::all();
         $users = User::all();
@@ -218,6 +220,26 @@ class NoticiaController extends Controller
             ->with('jornais', $jornal)
             ->with('seccaos', $seccao)
             ->with('users', $users)
-            ->with('conteudos', $conteudo);
+            ->with('conteudos', $conteudo)
+            ->with('secjornals', $secjornal);
+    }
+
+    public function jornalseccao($idSeccao, $idJornal)
+    {
+        $shownoticias = DB::table('noticias')->where('jornal_id', $idJornal)
+            ->where('seccao_id', $idSeccao)->get();
+        //return $shownoticias;
+        $seccao = Seccao::all();
+        $users = User::all();
+        $secjornal = Noticia::with('seccao')->select('seccao_id')->distinct()->where('jornal_id', $idJornal)->get();
+        $conteudo = Conteudo::with('noticia')->get();
+        $jornal = Jornal::find($idJornal);
+        return view('jornalseccao')
+            ->with('jornais', $jornal)
+            ->with('conteudos', $conteudo)
+            ->with('seccaos', $seccao)
+            ->with('users', $users)
+            ->with('secjornals', $secjornal)
+            ->with('noticiasseccao', $shownoticias);
     }
 }
