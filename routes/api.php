@@ -24,3 +24,5 @@ Route::resource('noticia','NoticiaController');
 Route::resource('seccao','SeccaoController');
 
 Route::resource('conteudo','ConteudoController');
+
+Route::resource('content_image','ContentImageController');

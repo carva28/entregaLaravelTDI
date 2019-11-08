@@ -105,3 +105,11 @@ Route::put('/conteudo/{conteudo}/edit','ConteudoController@update')->name('updat
 
 Route::get('/elima-conteudo/{conteudo}','ConteudoController@formdelete')->name('delete-conteudoform');
 Route::delete('/elima-conteudo/{conteudo}','ConteudoController@destroy')->name('delete-conteudo');
+
+
+/**
+ * API Editar Imagem
+ */
+Route::get('/lista_editarimagem','ContentImageController@index')->name('lista_editarimagem');  
+Route::get('/insert-editarimagem','ContentImageController@form')->name('editarimagem-form');  
+Route::post('/insert-editarimagem','ContentImageController@store')->name('insert-editarimagem'); 

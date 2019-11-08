@@ -65,7 +65,8 @@
                             <div class="col-md-6">
                                 
                                     @foreach($seccaos as $seccao)
-                                    <input class="input_radio_seccao" type="radio" name="seccao_id" value="{{$seccao->id}}" checked> <img class="img-fluid_inserir" src="/uploads/{{$seccao->imagem_seccao}}" /> {{$seccao->nome_seccao}} <br>
+                                    <input class="input_radio_seccao" type="radio" name="seccao_id" value="{{$seccao->id}}" checked> 
+                                        <img class="img-fluid_inserir" src="/uploads/{{$seccao->imagem_seccao}}" /> {{$seccao->nome_seccao}} <br>
                                     
                                     @endforeach
                                 
