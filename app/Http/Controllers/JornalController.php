@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Validator;
 class JornalController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('role:admin')->only(['store', 'update']);
+    }
+    /**
      * Apresentação dos jornais associados aos editores.
      * Interpretação de quem pertence o jornal
      * HTTP Response
@@ -25,25 +34,23 @@ class JornalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //return Jornal::all();
         $jornal = Jornal::with('user')->get();
-
+        $userID = $request->user();
         $response = [
             'data' => $jornal,
             'message' => 'Listagem de jornais',
-            'result' => 'OK'
+            'result' => 'OK',
+            'userauth'=>$userID
         ];
 
-        //return response($response, 200);
+       
+        return response($response, 200);
         
-        if ($response['result'] == 'OK') {
-            return view('feedjornal')
-                ->with('jornais', $jornal);
-        } else {
-            return 'Ocorreu um erro';
-        }
+        // return view('feedjornal')
+        //     ->with('jornais', $jornal)->with('userauth',$userID);
     }
 
     public function form()
@@ -69,7 +76,7 @@ class JornalController extends Controller
 
 
         $validator = Validator::make($data, [
-            'name_jornal' => 'required|unique:jornals|string|max:60', 
+            'name_jornal' => 'required|unique:jornals|string|max:60',
             'description' => 'required|string|max:255',
             'user_id' => 'required|exists:users,id',
         ], [

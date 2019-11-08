@@ -48,12 +48,12 @@
                                 
                                 <div class="col-sm">
                                     <a href="{{ url('editar-jornal/'.$jornal->id) }}" class="btn btn-xs btn-info pull-right">
-                                        Editar Secção
+                                        Editar Jornal
                                     </a>
                                 </div>
                                 <div class="col-sm">
                                     <a class="btn_elimina_seccao" href="{{ url('elima-jornal/'.$jornal->id) }}" class="btn btn-xs btn-info pull-right">
-                                        Eliminar Secção
+                                        Eliminar Jornal
                                     </a>
                                 </div>
 

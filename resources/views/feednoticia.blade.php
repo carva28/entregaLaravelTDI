@@ -42,10 +42,10 @@
                     <td>
                         <div class="col-sm">
                             <a href="{{ url('editar-noticia/'.$noticia->id) }}" class="btn btn-xs btn-info pull-right">
-                                Editar Secção
+                                Editar Notícia
                             </a>
                             <a class="btn_elimina_seccao" href="{{ url('elima-noticia/'.$noticia->id) }}" class="btn btn-xs btn-info pull-right">
-                                Eliminar Secção
+                                Eliminar Notícia
                             </a>
                         </div>
                     </td>

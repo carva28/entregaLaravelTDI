@@ -27,13 +27,10 @@ class ContentImageController extends Controller
         ];
 
 
-        if ($response['result'] == 'OK') {
+        
             return view('feededitarimagem')
                 ->with('imagenseditadas', $response['data']);
             //return $response;
-        } else {
-            return 'Não encontramos nada';
-        }
     }
 
 

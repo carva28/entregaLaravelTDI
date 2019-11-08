@@ -32,7 +32,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 /**
  * Backoffice Routes
  */
-Route::group(['prefix' => 'admin', 'namespace' => 'Backoffice', 'middleware' => ['auth', 'role:admin|manager']],
+Route::group(['prefix' => 'admin', 'namespace' => 'Backoffice', 'middleware' => ['auth', 'role:admin|editor']],
     function()
     {
         Route::get('/', 'DashboardController@index')->name('admin');
@@ -113,3 +113,6 @@ Route::delete('/elima-conteudo/{conteudo}','ConteudoController@destroy')->name('
 Route::get('/lista_editarimagem','ContentImageController@index')->name('lista_editarimagem');  
 Route::get('/insert-editarimagem','ContentImageController@form')->name('editarimagem-form');  
 Route::post('/insert-editarimagem','ContentImageController@store')->name('insert-editarimagem'); 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

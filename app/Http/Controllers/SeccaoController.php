@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Seccao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Requests\SeccaoStoreRequest;
 /**
  * @group API da Secção management
  * 
@@ -63,24 +63,24 @@ class SeccaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SeccaoStoreRequest $request)
     {
         $data = $request->all();
 
 
-        $validator = Validator::make($data, [
-            'nome_seccao' => 'required|unique:seccaos|string|max:60',
-            'imagem_seccao' => 'required|image'
-        ], [
-            'nome_seccao.required' => 'é necessário ter um nome',
-            'imagem_seccao.required' => 'é necessário ter uma imagem',
-        ]);
+        // $validator = Validator::make($data, [
+        //     'nome_seccao' => 'required|unique:seccaos|string|max:60',
+        //     'imagem_seccao' => 'required|image'
+        // ], [
+        //     'nome_seccao.required' => 'é necessário ter um nome',
+        //     'imagem_seccao.required' => 'é necessário ter uma imagem',
+        // ]);
 
 
 
-        if ($validator->fails()) {
-            return $validator->errors()->all();
-        }
+        // if ($validator->fails()) {
+        //     return $validator->errors()->all();
+        // }
 
         $file = $request->file('imagem_seccao')->store('images');
         $data['imagem_seccao'] = $file;

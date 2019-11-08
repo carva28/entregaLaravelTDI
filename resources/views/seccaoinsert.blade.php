@@ -37,7 +37,7 @@
                             <label for="nome_seccao" class="col-md-4 col-form-label text-md-right">Nome da Secção</label>
 
                             <div class="col-md-6">
-                                <input id="nome_seccao" type="text" class="form-control @error('nome_seccao') is-invalid @enderror" name="nome_seccao" value="{{ old('nome_seccao') }}" required autocomplete="nome_seccao" autofocus>
+                                <input id="nome_seccao" type="text" class="form-control @error('nome_seccao') is-invalid @enderror" name="nome_seccao" value="{{ old('nome_seccao') }}"  autocomplete="nome_seccao" autofocus>
 
                                 @error('nome_seccao')
                                 <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
                             <label for="description" class="col-md-4 col-form-label text-md-right">File</label>
 
                             <div class="col-md-6">
-                                <input id="imagem_seccao" type="file" class="form-control @error('imagem_seccao') is-invalid @enderror" name="imagem_seccao" value="{{ old('imagem_seccao') }}" required autocomplete="imagem_seccao">
+                                <input id="imagem_seccao" type="file" class="form-control @error('imagem_seccao') is-invalid @enderror" name="imagem_seccao" value="{{ old('imagem_seccao') }}"  autocomplete="imagem_seccao">
 
                                 @error('imagem_seccao')
                                 <span class="invalid-feedback" role="alert">

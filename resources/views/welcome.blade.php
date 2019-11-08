@@ -30,6 +30,8 @@
             align-items: center;
             display: flex;
             justify-content: center;
+            background: rgb(238,174,202);
+            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
         }
 
         .position-ref {
@@ -48,6 +50,7 @@
 
         .title {
             font-size: 84px;
+            color: white;
         }
 
         .links>a {
@@ -58,10 +61,15 @@
             letter-spacing: .1rem;
             text-decoration: none;
             text-transform: uppercase;
+            transition: 0.5s;
         }
 
         .m-b-md {
             margin-bottom: 30px;
+        }
+        .links a:hover{
+            font-size: 18px;
+            color:white;
         }
     </style>
 </head>
@@ -98,7 +106,10 @@
                     Ver notícias
                 </a>
                 <a href="{{ route('lista_conteudo') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
-                    Ver conteudos
+                    Ver conteúdos
+                </a>
+                <a href="{{ route('lista_editarimagem') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                    Editar Imagem
                 </a>
             </div>
         </div>
