@@ -80,7 +80,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="user_id" class="col-md-4 col-form-label text-md-right">Utilizadores</label>
+                        
+                                @auth
+                                
+                                @if (Auth::user()->role->name ===  "admin")
+                                <label for="seccao_id" class="col-md-4 col-form-label text-md-right">Utilizadores</label>
 
                             <div class="col-md-6">
                                 <select name="user_id">
@@ -88,13 +92,18 @@
                                     <option value="{{$user->id}}">{{$user->username}}</option>
                                     @endforeach
                                 </select>
-
+                                @elseif (Auth::user()->role->name ===  "editor" || Auth::user()->role->name ===  "reporter")
+                                
+                            <div class="col-md-6">
+                                <input id="user_id" type="text" class="invisible form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ Auth::user()->id }}" required autocomplete="titulo_noticia" autofocus>
 
                                 @error('user_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                @endif
+                                @endauth
                             </div>
                         </div>
 

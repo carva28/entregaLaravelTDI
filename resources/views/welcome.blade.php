@@ -30,8 +30,8 @@
             align-items: center;
             display: flex;
             justify-content: center;
-            background: rgb(238,174,202);
-            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+            background: rgb(238, 174, 202);
+            background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
         }
 
         .position-ref {
@@ -67,9 +67,10 @@
         .m-b-md {
             margin-bottom: 30px;
         }
-        .links a:hover{
+
+        .links a:hover {
             font-size: 18px;
-            color:white;
+            color: white;
         }
     </style>
 </head>
@@ -95,7 +96,11 @@
                 NotíciArte App
             </div>
 
+            @auth
             <div class="links">
+
+
+                @if(Auth::user()->role->name === "admin"||Auth::user()->role->name ===  "editor")
                 <a href="{{ route('lista_seccao') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Ver secções do jornal
                 </a>
@@ -111,7 +116,26 @@
                 <a href="{{ route('lista_editarimagem') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Editar Imagem
                 </a>
+
+                @else(Auth::user()->role->name === "reporter")
+                <a href="{{ route('lista_jornais') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                    Ver jornal digital
+                </a>
+                <a href="{{ route('lista_editarimagem') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                    Editar Imagem
+                </a>
+                @endif
+
             </div>
+            @endauth
+            @guest
+            <div class="links">
+
+                <a href="{{ route('lista_jornais') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                    Ver jornal digital
+                </a>
+            </div>
+            @endguest
         </div>
     </div>
 </body>

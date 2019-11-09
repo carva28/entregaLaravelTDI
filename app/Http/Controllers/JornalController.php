@@ -22,10 +22,13 @@ class JornalController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    /* public function __construct()
     {
-        $this->middleware('role:admin')->only(['store', 'update']);
-    }
+        // $this->middleware('auth');
+        // $this->middleware('role:guest|reporter|editor|admin')->only(['index']);
+        $this->middleware('role:editor|admin')->only(['form','store','formupdate','update']);
+        $this->middleware('role:admin')->only(['formdelete','destroy']);
+    } */
     /**
      * Apresentação dos jornais associados aos editores.
      * Interpretação de quem pertence o jornal
@@ -47,10 +50,10 @@ class JornalController extends Controller
         ];
 
        
-        return response($response, 200);
+        //return response($response, 200);
         
-        // return view('feedjornal')
-        //     ->with('jornais', $jornal)->with('userauth',$userID);
+        return view('feedjornal')
+            ->with('jornais', $jornal)->with('userauth',$userID);
     }
 
     public function form()

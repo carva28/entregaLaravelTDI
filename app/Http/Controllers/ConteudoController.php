@@ -188,12 +188,10 @@ class ConteudoController extends Controller
             'message' => 'Conteudo editado',
             'result' => 'OK'
         ];
-        if ($response['result'] == 'OK') {
+        
             return view('feedconteudo')
                 ->with('conteudos', $response['data'])->with('messages',$response['message']);
-        } else {
-            return 'Ocorreu um erro';
-        }
+        
         //return response($conteudo);
     }
 

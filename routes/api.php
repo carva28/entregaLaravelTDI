@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 // });
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::resource('jornal', 'JornalController');
+    //Route::resource('jornal', 'JornalController');
     
 });
 
@@ -26,4 +26,4 @@ Route::resource('noticia', 'NoticiaController');
 Route::resource('seccao', 'SeccaoController');
 Route::resource('conteudo', 'ConteudoController');
 Route::resource('content_image', 'ContentImageController');
-//Route::resource('jornal','JornalController'); //o modelo tipo post, segundo parametro controlador que gere as rotas
+Route::resource('jornal','JornalController'); //o modelo tipo post, segundo parametro controlador que gere as rotas
