@@ -27,13 +27,16 @@
                         <p class="seccao_p"> Secção:{{ $seccao->nome_seccao }}</p>
                     </div>
                 </div>
-                {{-- asasa --}}
+
                 <div class="card-body">
                     <div class="row">
 
                         <div class="col-md-4">
                             <img class="img-fluid" src="/uploads/{{$seccao->imagem_seccao}}" />
                             <div class="row2">
+                            @auth  
+                                @if (Auth::user()->role->name === "admin" ||
+                                Auth::user()->role->name === "editor")
                                 <div class="col-sm">
                                     <a href="{{ url('editar-seccao/'.$seccao->id) }}" class="btn btn-xs btn-info pull-right">
                                         Editar Secção
@@ -44,7 +47,8 @@
                                         Eliminar Secção
                                     </a>
                                 </div>
-
+                                @endif
+                                @endauth
                             </div>
                         </div>
 
@@ -52,6 +56,7 @@
 
                     </div>
                 </div>
+
                 @endforeach
 
             </div>

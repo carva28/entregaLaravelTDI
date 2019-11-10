@@ -44,21 +44,26 @@
                                     </a>
                             <div class="row2">
                                 
-                                    
-                                
+                            @auth        
+                            @if (Auth::user()->role->name === "admin" || Auth::user()->role->name === "editor")
                                 <div class="col-sm">
                                     <a href="{{ url('editar-jornal/'.$jornal->id) }}" class="btn btn-xs btn-info pull-right">
                                         Editar Jornal
                                     </a>
                                 </div>
+                                @if (Auth::user()->role->name === "admin")
                                 <div class="col-sm">
                                     <a class="btn_elimina_seccao" href="{{ url('elima-jornal/'.$jornal->id) }}" class="btn btn-xs btn-info pull-right">
                                         Eliminar Jornal
                                     </a>
                                 </div>
-
+                                @endif
+                                @endif
+                                @endauth
                             </div>
+                            
                         </div>
+                       
 
 
 

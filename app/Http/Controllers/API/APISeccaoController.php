@@ -1,22 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Seccao;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\SeccaoStoreRequest;
-use App\Http\Requests\SeccaoUpdateRequest;
-/**
- * @group API da Secção management
- * 
- * APIs para gerir seccções
- * 
- */
-class SeccaoController extends Controller
+use App\Http\Controllers\Controller;
+use App\Http\Requests\APISeccaoStoreRequest;
+use App\Http\Requests\APISeccaoUpdateRequest;
+
+class APISeccaoController extends Controller
 {
-
-
     /**
      * Apresenta das secções dos jornais
      *
@@ -36,19 +29,19 @@ class SeccaoController extends Controller
             'result' => 'OK'
         ];
 
-        //return response($response, 200);
-
-        
-            return view('mostraseca')
-                ->with('seccoes', $seccao);
-       
+        return response($response, 200);
     }
 
     public function form()
     {
         $seccao = Seccao::all();
-        return view('seccaoinsert')
-            ->with('seccoes', $seccao);
+
+        $response = [
+            'seccoes' => $seccao,
+            'message' => 'Form de inserir seccoes',
+            'result' => 'OK'
+        ];
+        return response($response, 200);
     }
 
 
@@ -62,7 +55,7 @@ class SeccaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SeccaoStoreRequest $request)
+    public function store(APISeccaoStoreRequest $request)
     {
         $data = $request->all();
 
@@ -83,8 +76,7 @@ class SeccaoController extends Controller
             'result' => 'OK'
         ];
 
-        //return response($response, 201);
-        return redirect()->route('lista_seccao',201);
+        return response($response, 201);
     }
 
 
@@ -92,8 +84,14 @@ class SeccaoController extends Controller
     public function formupdate($id)
     {
         $seccao = Seccao::find($id);
-        return view('editseccao')
-            ->with('seccoes', $seccao);
+
+        $response = [
+            'seccoes' => $seccao,
+            'message' => 'Form de atualizar seccoes',
+            'result' => 'OK'
+        ];
+
+        return response($response, 200);
     }
     /**
      * Atualização de uma secção específica 
@@ -107,10 +105,10 @@ class SeccaoController extends Controller
      * @param  \App\Seccao $seccao
      * @return \Illuminate\Http\Response
      */
-    public function update(SeccaoUpdateRequest $request, Seccao $seccao)
+    public function update(APISeccaoUpdateRequest $request, Seccao $seccao)
     {
         $data = $request->all();
-        
+
         if ($request->hasFile('imagem_seccao')) {
 
             $file = $request->file('imagem_seccao')->store('images');
@@ -122,15 +120,20 @@ class SeccaoController extends Controller
 
         $seccao->update($data);
 
-        return redirect()->route('lista_seccao',201);
+        return redirect()->route('lista_seccao', 201);
     }
 
-    
+
     public function formdelete($id)
     {
         $seccao = Seccao::find($id);
         $seccao->delete();
-        return redirect()->route('lista_seccao');
+        $response = [
+            'message' => 'Seccao eliminado',
+            'result' => 'OK'
+        ];
+
+        return response($response);
     }
 
     /**
@@ -146,6 +149,10 @@ class SeccaoController extends Controller
     {
         $seccao = Seccao::find($id);
         $seccao->delete();
-        return redirect()->route('lista_seccao');
+        $response = [
+            'message' => 'Seccao eliminado',
+            'result' => 'OK'
+        ];
+        return response($response);
     }
 }

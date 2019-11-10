@@ -72,15 +72,24 @@
             font-size: 18px;
             color: white;
         }
+
+        .titleola {
+            font-size: 40px;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
+
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
         <div class="top-right links">
             @auth
             <a href="{{ url('/home') }}">Home</a>
+            @if(Auth::user()->role->name === "admin")
+            <a class="dropdown-item" href="{{ route('admin') }}">Backoffice</a>
+            @endif
             @else
             <a href="{{ route('login') }}">Login</a>
 
@@ -92,15 +101,20 @@
         @endif
 
         <div class="content">
+
             <div class="title m-b-md">
                 NotíciArte App
             </div>
-
             @auth
+            <div class="titleola m-b-md">
+                Olá {{Auth::user()->name}}
+            </div>
             <div class="links">
 
 
-                @if(Auth::user()->role->name === "admin"||Auth::user()->role->name ===  "editor")
+                @if(Auth::user()->role->name === "admin" ||
+                Auth::user()->role->name === "editor" ||
+                Auth::user()->role->name === "reporter")
                 <a href="{{ route('lista_seccao') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Ver secções do jornal
                 </a>
@@ -117,13 +131,13 @@
                     Editar Imagem
                 </a>
 
-                @else(Auth::user()->role->name === "reporter")
+                <!-- @else(Auth::user()->role->name === "reporter")
                 <a href="{{ route('lista_jornais') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Ver jornal digital
                 </a>
                 <a href="{{ route('lista_editarimagem') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Editar Imagem
-                </a>
+                </a> -->
                 @endif
 
             </div>

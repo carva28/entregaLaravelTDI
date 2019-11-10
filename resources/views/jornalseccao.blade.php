@@ -25,14 +25,7 @@
         </div>
     </nav>
 
-    <!-- <div class="row">
-        <a href="/" class="btn btn-xs btn-info pull-right">
-            Home
-        </a>
-    </div> -->
-
-
-    <!-- <h2 style="text-align:center">{{$jornais->name_jornal}}</h2> -->
+    
 
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -133,8 +126,9 @@
 
                     <div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
+               
 
             </div>
         </div>

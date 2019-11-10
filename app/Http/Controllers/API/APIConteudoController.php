@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Conteudo;
 use App\Noticia;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\APIConteudoStoreRequest;
+use App\Http\Requests\APIConteudoUpdateRequest;
 
 /**
  * @group API do Conteudo
@@ -14,7 +17,7 @@ use Illuminate\Http\Request;
  * APIs para gerir conteudo
  * 
  */
-class ConteudoController extends Controller
+class APIConteudoController extends Controller
 {
     /**
      * Apresentação dos conteúdos proudzidos por grandes repórteres.
@@ -33,22 +36,26 @@ class ConteudoController extends Controller
             'result' => 'OK'
         ];
 
-
-
-
-        return view('feedconteudo')
-            ->with('conteudos', $response['data'])->with('messages', $response['message']);
+        return response($response,200);
+       
     }
 
     public function form()
     {
         $noticia = Noticia::all();
         $users = User::all();
-        return view('insertconteudo')
-            ->with('noticias', $noticia)->with('users', $users);
+
+        $response = [
+            'noticias' => $noticia,
+            'users' => $users,
+            'message' => 'Form de inserir conteudos',
+            'result' => 'OK'
+        ];
+        return response($response);
+            
     }
 
-
+    
     // public function create()
     // {
     //     //
@@ -67,26 +74,9 @@ class ConteudoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(APIConteudoStoreRequest $request)
     {
         $data = $request->all();
-
-
-        $validator = Validator::make($data, [
-            'tipo_conteudo' => 'required|string|max:60',
-            'ficheiro_conteudo' => 'required|mimes:mpga,mp3,mp4,avi,jpg,jpeg,png,gif',
-            'noticia_id' => 'required|exists:noticias,id',
-            'user_id' => 'required|exists:users,id',
-        ], [
-            'titulo_noticia.required' => 'é necessário ter um nome',
-            'ficheiro_conteudo.required' => 'é necessário ter video,imagem ou som',
-            'noticia_id.required' => 'é necessário saber qual é a notícia',
-            'user_id.required' => 'É necessário saber quem é o responsável pela noticia '
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors()->all();
-        }
 
         $file = $request->file('ficheiro_conteudo')->store('ficheiros_conteudos');
         $data['ficheiro_conteudo'] = $file;
@@ -100,7 +90,7 @@ class ConteudoController extends Controller
             ]
         );
 
-
+        
 
         $conteudo = Conteudo::with('noticia')->get();
         $response = [
@@ -108,12 +98,9 @@ class ConteudoController extends Controller
             'message' => 'Conteudo adicionado',
             'result' => 'OK'
         ];
+        
 
-        return view('feedconteudo')
-            ->with('conteudos', $response['data'])->with('messages', $response['message']);
-        //return redirect()->route('lista_conteudo')->with('messages',$response['message']);
-
-
+        return response($response, 201);
     }
 
     /**
@@ -129,7 +116,7 @@ class ConteudoController extends Controller
         //
     }
 
-
+    
 
     public function formupdate($id)
     {
@@ -137,9 +124,15 @@ class ConteudoController extends Controller
         $noticia = Noticia::all();
         $users = User::all();
 
-        return view('editconteudo')
-            ->with('conteudos', $conteudo)
-            ->with('noticias', $noticia)->with('users', $users);
+        $response = [
+            'conteudos' => $conteudo,
+            'noticias' => $noticia,
+            'users' => $users,
+            'message' => 'Conteudo para atualizar',
+            'result' => 'OK'
+        ];
+
+        return reponse($response,200);
     }
 
     /**
@@ -156,20 +149,11 @@ class ConteudoController extends Controller
      * @param  \App\Conteudo  $conteudo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Conteudo $conteudo)
+    public function update(APIConteudoUpdateRequest $request, Conteudo $conteudo)
     {
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'tipo_conteudo' => 'required|string|max:60',
-            'ficheiro_conteudo' => 'mimes:mpga,mp3,mp4,avi,jpg,jpeg,png,gif',
-            'noticia_id' => 'required|exists:noticias,id',
-            'user_id' => 'required|exists:users,id',
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors()->all();
-        }
+        
         if ($request->hasFile('ficheiro_conteudo')) {
             $file = $request->file('ficheiro_conteudo')->store('ficheiros_conteudos');
             $data['ficheiro_conteudo'] = $file;
@@ -183,28 +167,26 @@ class ConteudoController extends Controller
             'message' => 'Conteudo editado',
             'result' => 'OK'
         ];
-
-        return view('feedconteudo')
-            ->with('conteudos', $response['data'])->with('messages', $response['message']);
-
-        //return response($conteudo);
+        
+        
+        return response($conteudo,201);
     }
 
-
+    
     public function formdelete($id)
     {
         $conteudo = Conteudo::find($id);
         $conteudo->delete();
-
+        
         $todoscontents = Conteudo::with('noticia')->get();
         $response = [
             'data' => $todoscontents,
             'message' => 'Conteudo eliminado',
             'result' => 'OK'
         ];
-       
-            return view('feedconteudo')
-                ->with('conteudos', $response['data'])->with('messages', $response['message']);
+        
+        return response($response,200);
+
     }
 
 
@@ -228,7 +210,7 @@ class ConteudoController extends Controller
     {
         $conteudo = Conteudo::find($id);
         $conteudo->delete();
-
+        
         $todoscontents = Conteudo::with('noticia')->get();
         $response = [
             'data' => $todoscontents,
@@ -236,8 +218,8 @@ class ConteudoController extends Controller
             'result' => 'OK'
         ];
         
-            return view('feedconteudo')
-                ->with('conteudos', $response['data'])->with('messages', $response['message']);
-       
+
+        return response($response);
+        
     }
 }

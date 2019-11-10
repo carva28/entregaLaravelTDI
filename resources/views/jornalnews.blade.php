@@ -8,7 +8,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 @foreach($secjornals as $secjornal)
@@ -48,6 +48,10 @@
                 </div>
                 {{-- asasa --}}
                 <div class="card-body">
+                    <p class="p">
+                        {{ $noticia->created_at }}
+
+                    </p>
                     <div class="row">
 
                         <div class="col-md-4">
@@ -76,7 +80,7 @@
 
 
                     </div>
-
+                    
                     @foreach($conteudos as $conteudo)
                     @if($noticia->id===$conteudo->noticia_id)
 
@@ -117,25 +121,19 @@
                             @endif
 
                             @endif
+                            
+                            
                             @endforeach
-
-
-
                         </div>
-                        <p class="p">
-                            {{ $noticia->created_at }}
-                        </p>
+                        @endforeach
+                        </div>
                     </div>
-
-
-
-
-
-                    <div>
-                    </div>
+                    
+                    
                 </div>
-                @endforeach
-
+                
             </div>
         </div>
-        @endsection
+    </div>
+</div>
+    @endsection

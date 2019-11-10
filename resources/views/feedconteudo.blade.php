@@ -88,13 +88,16 @@
                                         Editar Conteudo
                                     </a>
                                 </div>
+                                @auth  
+                                @if (Auth::user()->role->name === "admin")
                                 <div class="col-sm">
                                     <a class="btn_elimina_seccao" href="{{ url('elima-conteudo/'.$conteudo->id) }}" class="btn btn-xs btn-info pull-right">
                                         Eliminar Conteudo
 
                                     </a>
                                 </div>
-
+                                @endif
+                                @endauth
                             </div>
                         </div>
 

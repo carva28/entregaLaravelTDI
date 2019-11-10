@@ -22,13 +22,13 @@ class JornalController extends Controller
      *
      * @return void
      */
-    /* public function __construct()
-    {
-        // $this->middleware('auth');
-        // $this->middleware('role:guest|reporter|editor|admin')->only(['index']);
-        $this->middleware('role:editor|admin')->only(['form','store','formupdate','update']);
-        $this->middleware('role:admin')->only(['formdelete','destroy']);
-    } */
+    // public function __construct()
+    // {
+    //     // $this->middleware('auth');
+    //     $this->middleware('role:guest|reporter|editor|admin')->only(['index']);
+    //     $this->middleware('role:editor|admin')->only(['form','store','formupdate','update']);
+    //     $this->middleware('role:admin')->only(['formdelete','destroy']);
+    // }
     /**
      * Apresentação dos jornais associados aos editores.
      * Interpretação de quem pertence o jornal
@@ -40,27 +40,37 @@ class JornalController extends Controller
     public function index(Request $request)
     {
         //return Jornal::all();
+
         $jornal = Jornal::with('user')->get();
         $userID = $request->user();
+
         $response = [
             'data' => $jornal,
             'message' => 'Listagem de jornais',
             'result' => 'OK',
-            'userauth'=>$userID
+            'userauth' => $userID
         ];
 
-       
+
         //return response($response, 200);
-        
+
         return view('feedjornal')
-            ->with('jornais', $jornal)->with('userauth',$userID);
+            ->with('jornais', $jornal)->with('userauth', $userID);
     }
 
-    public function form()
+    public function form(Request $request)
     {
-        $user = User::all();
-        return view('inserjornal')
-            ->with('users', $user);
+
+        $userID = $request->user();
+        $roleSession = $userID->role->name;
+
+        if ($userID->role->name === "reporter") {
+            abort(401);
+        } else if ($userID->role->name === "admin" || $roleSession === "editor") {
+            $user = User::all();
+            return view('inserjornal')
+                ->with('users', $user);
+        }
     }
     /**
      * Inserir uma notícia na Base de dados.
@@ -107,6 +117,7 @@ class JornalController extends Controller
         ];
 
         //return response($response, 201);
+
         return redirect()->route('lista_jornais', 201);
     }
 
@@ -124,12 +135,18 @@ class JornalController extends Controller
         return $jornal;
     }
 
-    public function formupdate($id)
+    public function formupdate(Request $request, $id)
     {
-        $jornal = Jornal::find($id);
+        $userID = $request->user();
 
-        return view('editjornal')
-            ->with('jornais', $jornal);
+        if ($userID->role->name === "reporter") {
+            abort(401);
+        } else {
+            $jornal = Jornal::find($id);
+
+            return view('editjornal')
+                ->with('jornais', $jornal);
+        }
     }
 
     /**
@@ -168,11 +185,23 @@ class JornalController extends Controller
     }
 
 
-    public function formdelete($id)
+    public function formdelete(Request $request, $id)
     {
-        $jornal = Jornal::find($id);
-        $jornal->delete();
-        return redirect()->route('lista_jornais', 200);
+        $userID = $request->user();
+
+        if ($userID->role->name === "reporter") {
+            
+            $response = [
+                'link' => 'lista_jornais',
+                'mensage' => "A Custom  Message",
+            ];
+            //abort( ($response),401);
+            abort(401,'lista_jornais');
+        } else {
+            $jornal = Jornal::find($id);
+            $jornal->delete();
+            return redirect()->route('lista_jornais', 200);
+        }
     }
     /**
      * Eliminar um jornal específico

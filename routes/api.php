@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 Route::resource('noticia', 'NoticiaController');
-Route::resource('seccao', 'SeccaoController');
-Route::resource('conteudo', 'ConteudoController');
+Route::resource('seccao', 'API\APISeccaoController');
+Route::resource('conteudo', 'API\APIConteudoController');
 Route::resource('content_image', 'ContentImageController');
 Route::resource('jornal','JornalController'); //o modelo tipo post, segundo parametro controlador que gere as rotas
