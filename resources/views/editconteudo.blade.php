@@ -92,9 +92,9 @@
                             </div>
                             @endif
                             @if(pathinfo($conteudos->ficheiro_conteudo, PATHINFO_EXTENSION) == "png" ||
-                                    pathinfo($conteudos->ficheiro_conteudo, PATHINFO_EXTENSION) == "gif" ||
-                                    pathinfo($conteudos->ficheiro_conteudo, PATHINFO_EXTENSION) == "jpg" ||
-                                    pathinfo($conteudos->ficheiro_conteudo, PATHINFO_EXTENSION) == "jpeg")
+                            pathinfo($conteudos->ficheiro_conteudo, PATHINFO_EXTENSION) == "gif" ||
+                            pathinfo($conteudos->ficheiro_conteudo, PATHINFO_EXTENSION) == "jpg" ||
+                            pathinfo($conteudos->ficheiro_conteudo, PATHINFO_EXTENSION) == "jpeg")
                             <div class="col-md-6">
                                 <label for="ficheiro_conteudo" class="label_file_content col-md-4 col-form-label text-md-right">File</label>
 
@@ -113,61 +113,68 @@
 
                 </div>
                 <div class="form-group row">
-                    <label for="user_id" class="col-md-4 col-form-label text-md-right">Utilizadores</label>
+                    @auth
+
+                    @if (Auth::user()->role->name === "admin")
+                    <label for="seccao_id" class="col-md-4 col-form-label text-md-right">Utilizadores</label>
 
                     <div class="col-md-6">
                         <select name="user_id">
-
-                            @foreach($users as $user):
-                            @if($conteudos->user_id===$user->id)
-                            <option selected value="{{ $conteudos->user_id }}" select> {{ $conteudos->user->username }} </option>
-                            @else
+                            @foreach($users as $user)
                             <option value="{{$user->id}}">{{$user->username}}</option>
-                            @endif @endforeach
+                            @endforeach
                         </select>
-                        @error('user_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span> @enderror
+                        @elseif (Auth::user()->role->name === "editor" || Auth::user()->role->name === "reporter")
+
+                        <div class="col-md-6">
+                            <input id="user_id" type="text" class="invisible form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ Auth::user()->id }}" required autocomplete="titulo_noticia" autofocus>
+
+                            @error('user_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            @endif
+                            @endauth
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label for="noticia_id" class="col-md-4 col-form-label text-md-right">Noticia</label>
+                    <div class="form-group row">
+                        <label for="noticia_id" class="col-md-4 col-form-label text-md-right">Noticia</label>
 
-                    <div class="col-md-6">
-                        <select name="noticia_id">
-                            
-                            @foreach($noticias as $noticia):
-                            @if($conteudos->noticia_id===$noticia->id)
-                            <option selected value="{{ $conteudos->noticia_id }}" > {{ $conteudos->noticia->titulo_noticia }} </option>
-                            @else
-                            <option value="{{$noticia->id}}">{{$noticia->titulo_noticia}}</option>
-                            @endif @endforeach
-                        </select>
+                        <div class="col-md-6">
+                            <select name="noticia_id">
 
-                        @error('noticia_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span> @enderror
+                                @foreach($noticias as $noticia):
+                                @if($conteudos->noticia_id===$noticia->id)
+                                <option selected value="{{ $conteudos->noticia_id }}"> {{ $conteudos->noticia->titulo_noticia }} </option>
+                                @else
+                                <option value="{{$noticia->id}}">{{$noticia->titulo_noticia}}</option>
+                                @endif @endforeach
+                            </select>
+
+                            @error('noticia_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span> @enderror
+                        </div>
                     </div>
-                </div>
 
-                <div class="form_btn_group_edit_content form-group row mb-0">
-                    <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btnsubmeterseccao btn btn-primary">
-                            Editar
-                        </button>
+                    <div class="form_btn_group_edit_content form-group row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btnsubmeterseccao btn btn-primary">
+                                Editar
+                            </button>
 
-                        <a href="{{ route('lista_conteudo') }}" class="btn_edit_cancelar_content btncandelarseccao btn btn-xs btn-info pull-right">
-                            Cancelar
-                        </a>
+                            <a href="{{ route('lista_conteudo') }}" class="btn_edit_cancelar_content btncandelarseccao btn btn-xs btn-info pull-right">
+                                Cancelar
+                            </a>
+                        </div>
                     </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

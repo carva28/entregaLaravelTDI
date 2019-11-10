@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Image;
+use App\Jornal;
 use App\ContentImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Jornal;
-use Image;
+use App\Http\Requests\ContentImageStoreRequest;
 
 class ContentImageController extends Controller
 {
@@ -48,7 +49,10 @@ class ContentImageController extends Controller
      */
     public function create()
     {
-        //
+        $jornal = Jornal::all();
+
+        return view('editarimagem')
+            ->with('jornals', $jornal);
     }
 
     /**
@@ -57,7 +61,7 @@ class ContentImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContentImageStoreRequest $request)
     {
         if ($request->hasFile('ficheiro_image')) {
             // //get filename with extension
@@ -74,17 +78,17 @@ class ContentImageController extends Controller
             $data = $request->all();
 
 
-            $validator = Validator::make($data, [
-                'ficheiro_image' => 'required|image',
-                'jornal_id' => 'required|exists:jornals,id',
-            ], [
-                'ficheiro_image.required' => 'é necessário submeter uma imagem',
-                'jornal_id.required' => 'é necessário saber qual é o jornal',
-            ]);
+            // $validator = Validator::make($data, [
+            //     'ficheiro_image' => 'required|image',
+            //     'jornal_id' => 'required|exists:jornals,id',
+            // ], [
+            //     'ficheiro_image.required' => 'é necessário submeter uma imagem',
+            //     'jornal_id.required' => 'é necessário saber qual é o jornal',
+            // ]);
 
-            if ($validator->fails()) {
-                return $validator->errors()->all();
-            }
+            // if ($validator->fails()) {
+            //     return $validator->errors()->all();
+            // }
 
             //Upload File
             $file = $request->file('ficheiro_image')->store('imagens_editadas');
@@ -121,12 +125,9 @@ class ContentImageController extends Controller
                 'message' => 'Imagem editada com sucesso foi adicionada',
                 'result' => 'OK'
             ];
-            if ($response['result'] == 'OK') {
-                return redirect()->route('lista_editarimagem', 201);
+            
+            return redirect()->route('lista_editarimagem', 201);
                     
-            } else {
-                return 'Ocorreu um erro';
-            }
         }
     }
 

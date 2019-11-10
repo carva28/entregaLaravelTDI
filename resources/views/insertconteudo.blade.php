@@ -10,7 +10,7 @@
         </a>
 
     </div>
-        
+
     <div class="row justify-content-center">
 
         <div class="insert_content col-md-8">
@@ -22,7 +22,7 @@
                         @csrf
 
 
-                        
+
                         <div class="form-group row">
                             <label for="tipo_conteudo" class="col-md-4 col-form-label text-md-right">Tipo de conteudo</label>
 
@@ -72,7 +72,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="user_id" class="col-md-4 col-form-label text-md-right">Utilizadores</label>
+                            @auth
+
+                            @if (Auth::user()->role->name === "admin")
+                            <label for="seccao_id" class="col-md-4 col-form-label text-md-right">Utilizadores</label>
 
                             <div class="col-md-6">
                                 <select name="user_id">
@@ -80,24 +83,29 @@
                                     <option value="{{$user->id}}">{{$user->username}}</option>
                                     @endforeach
                                 </select>
+                                @elseif (Auth::user()->role->name === "editor" || Auth::user()->role->name === "reporter")
 
+                                <div class="col-md-6">
+                                    <input id="user_id" type="text" class="invisible form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ Auth::user()->id }}" required autocomplete="titulo_noticia" autofocus>
 
-                                @error('user_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                    @error('user_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                    @endif
+                                    @endauth
+                                </div>
                             </div>
-                        </div>
 
 
-                        <div class="form-group row mb-0">
-                            <div class="btn_insert_content col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Submeter
-                                </button>
+                            <div class="form-group row mb-0">
+                                <div class="btn_insert_content col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Submeter
+                                    </button>
+                                </div>
                             </div>
-                        </div>
                     </form>
                 </div>
             </div>

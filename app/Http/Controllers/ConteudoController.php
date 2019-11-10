@@ -7,7 +7,7 @@ use App\Noticia;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 /**
  * @group API do Conteudo
  * 
@@ -24,17 +24,15 @@ class ConteudoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $conteudo = Conteudo::with('noticia')->get();
+        $userID = $request->user()->id;
+        $conteudo = Conteudo::with('noticia')->where('user_id', $userID)->get();
         $response = [
             'data' => $conteudo,
             'message' => 'Listagem de conteudos',
             'result' => 'OK'
         ];
-
-
-
 
         return view('feedconteudo')
             ->with('conteudos', $response['data'])->with('messages', $response['message']);
@@ -102,9 +100,10 @@ class ConteudoController extends Controller
 
 
 
-        $conteudo = Conteudo::with('noticia')->get();
+        $userID = $request->user()->id;
+        $todoscontents = Conteudo::with('noticia')->where('user_id', $userID)->get();
         $response = [
-            'data' => $conteudo,
+            'data' => $todoscontents,
             'message' => 'Conteudo adicionado',
             'result' => 'OK'
         ];
@@ -161,10 +160,10 @@ class ConteudoController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'tipo_conteudo' => 'required|string|max:60',
+            'tipo_conteudo' => 'string|max:60',
             'ficheiro_conteudo' => 'mimes:mpga,mp3,mp4,avi,jpg,jpeg,png,gif',
-            'noticia_id' => 'required|exists:noticias,id',
-            'user_id' => 'required|exists:users,id',
+            'noticia_id' => 'exists:noticias,id',
+            'user_id' => 'exists:users,id',
         ]);
 
         if ($validator->fails()) {
@@ -175,15 +174,14 @@ class ConteudoController extends Controller
             $data['ficheiro_conteudo'] = $file;
         }
 
+        $userID = $request->user()->id;
         $conteudo->update($data);
-
-        $todoscontents = Conteudo::with('noticia')->get();
+        $todoscontents = Conteudo::with('noticia')->where('user_id', $userID)->get();
         $response = [
             'data' => $todoscontents,
             'message' => 'Conteudo editado',
             'result' => 'OK'
         ];
-
         return view('feedconteudo')
             ->with('conteudos', $response['data'])->with('messages', $response['message']);
 
@@ -191,12 +189,13 @@ class ConteudoController extends Controller
     }
 
 
-    public function formdelete($id)
+    public function formdelete(Request $request,$id)
     {
         $conteudo = Conteudo::find($id);
         $conteudo->delete();
 
-        $todoscontents = Conteudo::with('noticia')->get();
+        $userID = $request->user()->id;
+        $todoscontents = Conteudo::with('noticia')->where('user_id', $userID)->get();
         $response = [
             'data' => $todoscontents,
             'message' => 'Conteudo eliminado',
@@ -224,12 +223,13 @@ class ConteudoController extends Controller
     //     $conteudo->delete();
     //     return "deleted";
     // }
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         $conteudo = Conteudo::find($id);
         $conteudo->delete();
 
-        $todoscontents = Conteudo::with('noticia')->get();
+        $userID = $request->user()->id;
+        $todoscontents = Conteudo::with('noticia')->where('user_id', $userID)->get();
         $response = [
             'data' => $todoscontents,
             'message' => 'Conteudo eliminado',

@@ -11,7 +11,7 @@
                     <form method="POST" action="{{ route('insert-jornal') }}" enctype="multipart/form-data">
                         @csrf
                         <!--<input type="hidden" name="_method" value="put">-->
-                       <!-- @method('put')-->
+                        <!-- @method('put')-->
                         <div class="form-group row">
                             <label for="name_jornal" class="col-md-4 col-form-label text-md-right">Nome do Jornal</label>
 
@@ -41,31 +41,36 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="user_id" class="col-md-4 col-form-label text-md-right">Utilizadores</label>
+                            @if (Auth::user()->role->name === "admin")
+                            <label for="seccao_id" class="col-md-4 col-form-label text-md-right">Utilizadores</label>
 
                             <div class="col-md-6">
                                 <select name="user_id">
                                     @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->username}}</option>
+                                    <option value="{{$user->id}}">{{$user->username}}</option>
                                     @endforeach
                                 </select>
-                                
+                                @elseif (Auth::user()->role->name === "editor")
 
-                                @error('user_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
+                                <div class="col-md-6">
+                                    <input id="user_id" type="text" class="invisible form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ Auth::user()->id }}" required autocomplete="titulo_noticia" autofocus>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Adiconar
-                                </button>
+                                    @error('user_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Adiconar
+                                    </button>
+                                </div>
+                            </div>
                     </form>
                 </div>
             </div>

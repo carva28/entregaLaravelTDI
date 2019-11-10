@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Noticia;
+use App\User;
 use App\Jornal;
 use App\Seccao;
-use App\User;
+use App\Noticia;
 use App\Conteudo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\NoticiaStoreRequest;
+use App\Http\Requests\NoticiaUpdateRequest;
 
 /**
  * @group API da Noticia
@@ -29,7 +31,6 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        //return Noticia::all();
         $noticia = Noticia::with('jornal')->with('seccao')->with('user')->get();
 
         $response = [
@@ -38,14 +39,9 @@ class NoticiaController extends Controller
             'result' => 'OK'
         ];
 
-        //return response($response, 200);
-
-        if ($response['result'] == 'OK') {
-            return view('feednoticia')
+        return view('feednoticia')
                 ->with('noticias', $noticia);
-        } else {
-            return 'Ocorreu um erro';
-        }
+        
     }
 
     public function form()
@@ -71,28 +67,9 @@ class NoticiaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NoticiaStoreRequest $request)
     {
         $data = $request->all();
-
-
-        $validator = Validator::make($data, [
-            'titulo_noticia' => 'required|unique:noticias|string|max:60',
-            'corpo_noticia' => 'required|string|max:255',
-            'jornal_id' => 'required|exists:jornals,id',
-            'seccao_id' => 'required|exists:seccaos,id',
-            'user_id' => 'required|exists:users,id',
-        ], [
-            'titulo_noticia.required' => 'é necessário ter um titulo',
-            'corpo_noticia.required' => 'é necessário ter texto',
-            'jornal_id.required' => 'é necessário saber qual é o jornal',
-            'seccao_id.required' => 'é necessário ter uma seccao',
-            'user_id.required' => 'É necessário saber quem é o responsável pela noticia '
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors()->all();
-        }
 
         $noticia = Noticia::create(
             [
@@ -110,7 +87,6 @@ class NoticiaController extends Controller
             'result' => 'OK'
         ];
 
-        //return response($response, 201);
         return redirect()->route('lista_noticia', 201);
     }
 
@@ -153,7 +129,7 @@ class NoticiaController extends Controller
      * @param  \App\Noticia $noticia
      * @return \Illuminate\Http\Response 
      */
-    public function update(Request $request, Noticia $noticium)
+    public function update(NoticiaUpdateRequest $request, Noticia $noticium)
     {
 
         $data = $request->all();

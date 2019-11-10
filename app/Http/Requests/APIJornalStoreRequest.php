@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-class APIConteudoUpdateRequest extends FormRequest
+class APIJornalStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,16 +25,17 @@ class APIConteudoUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome_seccao' => 'unique:seccaos|string|max:60',
-            'imagem_seccao' => 'image'
+            'name_jornal' => 'required|unique:jornals|string|max:60',
+            'description' => 'required|string|max:255',
+            'user_id' => 'required|exists:users,id',
         ];
     }
-
     public function messages(){
         return [
-            'nome_seccao.required' => 'é necessário ter um nome',
-            'nome_seccao.unique' => 'é necessário ter um nome único',
-            'imagem_seccao.image' => 'é necessário ter um dos formatos'
+            'name_jornal.required' => 'é necessário ter um nome',
+            'name_jornal.unique' => ' Esse nome já existe',
+            'description.required' => 'é necessário ter descrição',
+            'user_id' => 'É necessário saber quem é o responsável do Jornal '
         ];
     }
 
@@ -46,6 +47,7 @@ class APIConteudoUpdateRequest extends FormRequest
                     'data'=> $validator->errors(),
                     'msg' => 'Erro, tente de novo'
                 ], 422
+                
             )
                 );
     }

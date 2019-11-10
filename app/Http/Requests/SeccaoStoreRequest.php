@@ -36,20 +36,9 @@ class SeccaoStoreRequest extends FormRequest
             'nome_seccao.required' => 'é necessário ter um nome',
             'nome_seccao.unique' => 'é necessário ter um nome único',
             'imagem_seccao.required' => 'é necessário ter uma imagem',
-            'imagem_seccao.image' => 'é necessário ter um dos formatos'
+            'imagem_seccao.image' => 'é necessário ter um dos formatos de imagem'
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(
-            response()->json(
-                [
-                    'data'=> $validator->errors(),
-                    'msg' => 'Erro, tente de novo'
-                ], 422
-            )
-                );
-    }
 
 }

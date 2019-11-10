@@ -40,6 +40,7 @@ Route::group(
         Route::resource('user', 'UserController');
     }
 );
+
 /**
  * ADMIN & Editor & Reporter
  */
@@ -52,13 +53,11 @@ Route::group(
         Route::get('/lista_seccao', 'SeccaoController@index')->name('lista_seccao');
         Route::get('/insert-seccao', 'SeccaoController@form')->name('seccao-form');
         Route::post('/insert-seccao', 'SeccaoController@store')->name('insert-seccao');
-        /**
-         * API jornal
-         */
+        // /**
+        //  * API jornal
+        //  */
         Route::get('/insert-jornal', 'JornalController@form')->name('jornal-form');
         Route::post('/insert-jornal', 'JornalController@store')->name('insert-jornal');
-        Route::get('/editar-jornal/{jornal}', 'JornalController@formupdate')->name('updatejornal-form');
-        Route::get('/elima-jornal/{jornal}', 'JornalController@formdelete')->name('delete-jornalform');
 
         /**
          * API noticias
@@ -101,12 +100,12 @@ Route::group(
         Route::put('/seccao/{seccao}/edit', 'SeccaoController@update')->name('update-seccao'); //<- name é o nome que usamos no blade na action
         Route::get('/elima-seccao/{seccao}', 'SeccaoController@formdelete')->name('delete-secform');
         Route::delete('/elima-seccao/{seccao}', 'SeccaoController@destroy')->name('delete-seccao');
-        
+
         /**
          * API Jornal
          */
+        Route::get('/editar-jornal/{jornal}', 'JornalController@formupdate')->name('updatejornal-form');
         Route::put('/jornal/{jornal}/edit', 'JornalController@update')->name('update-jornal');
-        Route::delete('/elima-jornal/{jornal}', 'JornalController@destroy')->name('delete-jornal');
 
         /**
          * API noticias

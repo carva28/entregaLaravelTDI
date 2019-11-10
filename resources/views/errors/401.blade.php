@@ -30,7 +30,8 @@
             align-items: center;
             display: flex;
             justify-content: center;
-               }
+            background: rgb(148, 187, 233);
+        }
 
         .position-ref {
             position: relative;
@@ -44,13 +45,15 @@
 
         .content {
             text-align: center;
-            background: rgb(253, 29, 29);
-            background: radial-gradient(circle, rgba(253, 29, 29, 1) 0%, rgba(131, 58, 180, 1) 100%);
-    
+            background: rgb(238, 174, 202);
+            border: 1px solid transparent;
+            border-radius: 50px;
+            width: 50%;
+            padding: 25px;
         }
 
         .title {
-            font-size: 84px;
+            font-size: 50px;
             color: white;
         }
 
@@ -74,13 +77,17 @@
         }
 
         .h2404 {
-            color: white;
+            color: #e62b7d;
             font-size: 50px;
         }
 
-        .h4404{
-            color: white;
+        .h4404 {
+            color: #3a6598;
             font-size: 20px;
+        }
+
+        .img401 {
+            width: 30%;
         }
     </style>
 </head>
@@ -88,8 +95,10 @@
 <body>
     <div class="flex-center position-ref full-height">
         <div class="content">
-            <h2 class="h2404">401 Error Hey onde vais?</h2>
+            <h2 class="h2404">401 Error </h2>
+            <h4 class="h4404">Hey onde vais? </h4>
             <h4 class="h4404">Não tens acesso</h4>
+            <img class="img401" src="images/errors/police-officer-3-512.png"/>
             <div class="links">
                 <a href="/{{ $exception->getMessage() }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Voltar atrás

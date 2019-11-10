@@ -8,6 +8,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\APISeccaoStoreRequest;
 use App\Http\Requests\APISeccaoUpdateRequest;
 
+/**
+ * @group API do Jornal 
+ * 
+ * APIs para gerir secções
+ * 
+ */
 class APISeccaoController extends Controller
 {
     /**
@@ -120,21 +126,11 @@ class APISeccaoController extends Controller
 
         $seccao->update($data);
 
-        return redirect()->route('lista_seccao', 201);
+        return response($seccao,201);
     }
 
 
-    public function formdelete($id)
-    {
-        $seccao = Seccao::find($id);
-        $seccao->delete();
-        $response = [
-            'message' => 'Seccao eliminado',
-            'result' => 'OK'
-        ];
-
-        return response($response);
-    }
+   
 
     /**
      * Eliminar uma notícia específica
@@ -145,14 +141,14 @@ class APISeccaoController extends Controller
      * @param  \App\Seccao  $seccao
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Seccao $seccao)
     {
-        $seccao = Seccao::find($id);
+        
         $seccao->delete();
         $response = [
             'message' => 'Seccao eliminado',
             'result' => 'OK'
         ];
-        return response($response);
+        return response($response,200);
     }
 }

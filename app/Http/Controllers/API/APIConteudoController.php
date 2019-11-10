@@ -172,22 +172,6 @@ class APIConteudoController extends Controller
         return response($conteudo,201);
     }
 
-    
-    public function formdelete($id)
-    {
-        $conteudo = Conteudo::find($id);
-        $conteudo->delete();
-        
-        $todoscontents = Conteudo::with('noticia')->get();
-        $response = [
-            'data' => $todoscontents,
-            'message' => 'Conteudo eliminado',
-            'result' => 'OK'
-        ];
-        
-        return response($response,200);
-
-    }
 
 
     /**
@@ -206,14 +190,11 @@ class APIConteudoController extends Controller
     //     $conteudo->delete();
     //     return "deleted";
     // }
-    public function destroy($id)
+    public function destroy(Conteudo $conteudo)
     {
-        $conteudo = Conteudo::find($id);
         $conteudo->delete();
         
-        $todoscontents = Conteudo::with('noticia')->get();
         $response = [
-            'data' => $todoscontents,
             'message' => 'Conteudo eliminado',
             'result' => 'OK'
         ];

@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Jornal;
 use App\User;
 use App\Noticia;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\APIJornalStoreRequest;
+use App\Http\Requests\APIJornalUpdateRequest;
 
 /**
  * @group API do Jornal 
@@ -14,21 +16,8 @@ use Illuminate\Support\Facades\Validator;
  * APIs para gerir jornais
  * 
  */
-
-class JornalController extends Controller
+class APIJornalController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     // $this->middleware('auth');
-    //     $this->middleware('role:guest|reporter|editor|admin')->only(['index']);
-    //     $this->middleware('role:editor|admin')->only(['form','store','formupdate','update']);
-    //     $this->middleware('role:admin')->only(['formdelete','destroy']);
-    // }
     /**
      * Apresentação dos jornais associados aos editores.
      * Interpretação de quem pertence o jornal
@@ -37,41 +26,52 @@ class JornalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        //return Jornal::all();
-
         $jornal = Jornal::with('user')->get();
-        $userID = $request->user();
+
 
         $response = [
             'data' => $jornal,
             'message' => 'Listagem de jornais',
             'result' => 'OK',
-            'userauth' => $userID
         ];
 
 
-        //return response($response, 200);
-
-        return view('feedjornal')
-            ->with('jornais', $jornal)->with('userauth', $userID);
+        return response($response, 200);
     }
 
-    public function form(Request $request)
-    {
 
+
+    /**
+     * Apresentação do formulário de inserir jornais.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
         $userID = $request->user();
         $roleSession = $userID->role->name;
 
         if ($userID->role->name === "reporter") {
-            abort(401,'lista_jornais');
+            $response = [
+                'data' => 'Não tem acesso',
+                'message' => 'Listagem de jornais',
+                'result' => 'OK',
+            ];
+            return response($response, 200);
         } else if ($userID->role->name === "admin" || $roleSession === "editor") {
             $user = User::all();
-            return view('inserjornal')
-                ->with('users', $user);
+            
+            $response = [
+                'data' => $user,
+                'message' => 'Listagem de jornais',
+                'result' => 'OK',
+            ];
+            return response($response, 200);
         }
     }
+
     /**
      * Inserir uma notícia na Base de dados.
      * Faz redirect da rota se armazenar os dados corretamente esta 
@@ -83,24 +83,9 @@ class JornalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(APIJornalStoreRequest $request)
     {
         $data = $request->all();
-
-
-        $validator = Validator::make($data, [
-            'name_jornal' => 'required|unique:jornals|string|max:60',
-            'description' => 'required|string|max:255',
-            'user_id' => 'required|exists:users,id',
-        ], [
-            'name_jornal.required' => 'é necessário ter um nome',
-            'description.required' => 'é necessário ter descrição',
-            'user_id' => 'É necessário saber quem é o responsável do Jornal '
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors()->all();
-        }
 
         $jornal = Jornal::create(
             [
@@ -116,9 +101,7 @@ class JornalController extends Controller
             'result' => 'OK'
         ];
 
-        //return response($response, 201);
-
-        return redirect()->route('lista_jornais', 201);
+        return response($response, 201);
     }
 
     /**
@@ -135,17 +118,31 @@ class JornalController extends Controller
         return $jornal;
     }
 
-    public function formupdate(Request $request, $id)
+    /**
+     * Apresentação do formulário de editar jornais.
+     *
+     * @param  \App\Jornal  $jornal
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request,Jornal $jornal)
     {
         $userID = $request->user();
 
         if ($userID->role->name === "reporter") {
-            abort(401);
+            $response = [
+                'message' => 'Não tem acesso',
+                'result' => 'OK',
+            ];
+            return response($response, 200);
         } else {
-            $jornal = Jornal::find($id);
+            $jornal = Jornal::find($jornal);
 
-            return view('editjornal')
-                ->with('jornais', $jornal);
+            $response = [
+                'data' => $jornal,
+                'message' => 'Listagem de jornais por id',
+                'result' => 'OK',
+            ];
+            return response($response, 200);
         }
     }
 
@@ -163,46 +160,14 @@ class JornalController extends Controller
      * @param  \App\Jornal $jornal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jornal $jornal)
+    public function update(APIJornalUpdateRequest $request, Jornal $jornal)
     {
         $data = $request->all();
-
-        $validator = Validator::make($data, [
-            'name_jornal' => 'required|string|max:60',
-            'description' => 'required|string|max:255',
-            'user_id' => 'required|exists:users,id',
-
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors()->all();
-        }
-
         $jornal->update($data);
-
-        //return response($jornal);
-        return redirect()->route('lista_jornais', 200);
+        return response($jornal, 200);
     }
 
 
-    public function formdelete(Request $request, $id)
-    {
-        $userID = $request->user();
-
-        if ($userID->role->name === "reporter") {
-            
-            $response = [
-                'link' => 'lista_jornais',
-                'mensage' => "A Custom  Message",
-            ];
-            //abort( ($response),401);
-            abort(401,'lista_jornais');
-        } else {
-            $jornal = Jornal::find($id);
-            $jornal->delete();
-            return redirect()->route('lista_jornais', 200);
-        }
-    }
     /**
      * Eliminar um jornal específico
      * 
@@ -212,12 +177,16 @@ class JornalController extends Controller
      * @param  \App\Jornal  $jornal
      * @return \Illuminate\Http\Response
      */
-
-
-    public function destroy($id)
+    public function destroy(Jornal $jornal)
     {
-        $jornal = Jornal::find($id);
+
         $jornal->delete();
-        return redirect()->route('lista_jornais', 200);
+
+        $response = [
+            'message' => 'Jornal eliminado',
+            'result' => 'OK'
+        ];
+
+        return response($response, 200);
     }
 }

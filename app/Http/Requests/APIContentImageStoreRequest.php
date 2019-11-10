@@ -5,7 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-class APIConteudoUpdateRequest extends FormRequest
+
+class APIContentImageStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,16 +26,17 @@ class APIConteudoUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome_seccao' => 'unique:seccaos|string|max:60',
-            'imagem_seccao' => 'image'
+            'ficheiro_image' => 'required|image|max:3000000',
+            'jornal_id' => 'required|exists:jornals,id',
         ];
     }
-
-    public function messages(){
+    public function messages()
+    {
         return [
-            'nome_seccao.required' => 'é necessário ter um nome',
-            'nome_seccao.unique' => 'é necessário ter um nome único',
-            'imagem_seccao.image' => 'é necessário ter um dos formatos'
+            'ficheiro_image.required' => 'É necessário ter uma imagem',
+            'jornal_id.required' =>  'é necessário saber qual é o jornal',
+            'ficheiro_image.image' => 'É necessário ser uma imagem',
+            'ficheiro_image.max' => ':attribute deve ter :size.',
         ];
     }
 
@@ -43,10 +45,12 @@ class APIConteudoUpdateRequest extends FormRequest
         throw new HttpResponseException(
             response()->json(
                 [
-                    'data'=> $validator->errors(),
+                    'data' => $validator->errors(),
                     'msg' => 'Erro, tente de novo'
-                ], 422
+                ],
+                422
+
             )
-                );
+        );
     }
 }
