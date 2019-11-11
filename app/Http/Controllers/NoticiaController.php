@@ -29,10 +29,11 @@ class NoticiaController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $noticia = Noticia::with('jornal')->with('seccao')->with('user')->get();
-
+        $userID = $request->user()->id;
+        $noticia = Noticia::with('jornal')->with('seccao')->with('user')->where('user_id', $userID)->get();;
+    
         $response = [
             'data' => $noticia,
             'message' => 'Listagem de Noticias',
@@ -86,7 +87,7 @@ class NoticiaController extends Controller
             'message' => 'Noticia adicionada',
             'result' => 'OK'
         ];
-
+        
         return redirect()->route('lista_noticia', 201);
     }
 
@@ -109,7 +110,7 @@ class NoticiaController extends Controller
         $jornal = Jornal::all();
         $seccao = Seccao::all();
         $users = User::all();
-
+        
         return view('editnoticia')
             ->with('noticias', $noticia)
             ->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);

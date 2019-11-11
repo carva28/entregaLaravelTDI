@@ -23,15 +23,14 @@ class ContentImageController extends Controller
         $imagenseditadas = ContentImage::with('jornal')->get();
         $response = [
             'data' => $imagenseditadas,
+            'jornais' => $jornal,
             'message' => 'Listagem de imagens editadas',
             'result' => 'OK'
         ];
 
-
-        
-            return view('feededitarimagem')
-                ->with('imagenseditadas', $response['data']);
-            //return $response;
+        return view('feededitarimagem')
+            ->with('imagenseditadas', $response['data'])->with('jornais', $response['jornais']);
+        //return $response;
     }
 
 
@@ -64,6 +63,8 @@ class ContentImageController extends Controller
     public function store(ContentImageStoreRequest $request)
     {
         if ($request->hasFile('ficheiro_image')) {
+
+            
             // //get filename with extension
             // $filenamewithextension = $request->file('ficheiro_image')->getClientOriginalName();
 
@@ -76,20 +77,7 @@ class ContentImageController extends Controller
             // //filename to store
             // $filenametostore = $filename . '_' . time() . '.' . $extension;
             $data = $request->all();
-
-
-            // $validator = Validator::make($data, [
-            //     'ficheiro_image' => 'required|image',
-            //     'jornal_id' => 'required|exists:jornals,id',
-            // ], [
-            //     'ficheiro_image.required' => 'é necessário submeter uma imagem',
-            //     'jornal_id.required' => 'é necessário saber qual é o jornal',
-            // ]);
-
-            // if ($validator->fails()) {
-            //     return $validator->errors()->all();
-            // }
-
+            
             //Upload File
             $file = $request->file('ficheiro_image')->store('imagens_editadas');
 
@@ -100,7 +88,20 @@ class ContentImageController extends Controller
             //     $constraint->aspectRatio();
             // });
             //$img = Image::make($imagemeditada)->greyscale()->brightness(60);
-            $img = Image::make($imagemeditada)->greyscale();
+            if($data["effectvalue"] === "grey"){
+                $img = Image::make($imagemeditada)->greyscale();
+            }else if($data["effectvalue"] === "contrast200"){
+                $img = Image::make($imagemeditada)->contrast(100);
+            }else if($data["effectvalue"] === "briho130"){
+                $img = Image::make($imagemeditada)->brightness(20);
+            }else if($data["effectvalue"] === "briho80"){
+                $img = Image::make($imagemeditada)->brightness(-40);
+            }else if($data["effectvalue"] === "greybrightness20"){
+                $img = Image::make($imagemeditada)->brightness(30)->greyscale();
+            }else if($data["effectvalue"] === "none"){
+                $img = Image::make($imagemeditada)->brightness(0);
+            }
+            
             $img->save($imagemeditada);
 
             $urlImg = $img->basename;
@@ -125,9 +126,8 @@ class ContentImageController extends Controller
                 'message' => 'Imagem editada com sucesso foi adicionada',
                 'result' => 'OK'
             ];
-            
+
             return redirect()->route('lista_editarimagem', 201);
-                    
         }
     }
 

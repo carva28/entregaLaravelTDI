@@ -16,6 +16,7 @@
         </div>
     </div>
     <div class="row justify-content-center">
+    @if(!$noticias->isEmpty())
         <table class="table">
             <thead>
                 <tr>
@@ -28,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-
+                
                 @foreach($noticias as $noticia)
 
                 <tr>
@@ -58,7 +59,12 @@
                 {{-- asasa --}}
 
                 @endforeach
-
+                @else
+                <div class="colunanao column">
+                <p class="feed_p">Não tens conteúdo</p>
+                <img class="imgtable" id="sadnews" src="https://static.thenounproject.com/png/515962-200.png" />
+                </div>
+                @endif
     </div>
 </div>
 @endsection

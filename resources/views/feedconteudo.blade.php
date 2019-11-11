@@ -31,12 +31,13 @@
 
         </div>
         @elseif ($messages == "Listagem de conteudos")
-        
+
         @endif
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                @if(!$conteudos->isEmpty())
                 @foreach($conteudos as $conteudo)
 
 
@@ -88,7 +89,7 @@
                                         Editar Conteudo
                                     </a>
                                 </div>
-                                @auth  
+                                @auth
                                 @if (Auth::user()->role->name === "admin")
                                 <div class="col-sm">
                                     <a class="btn_elimina_seccao" href="{{ url('elima-conteudo/'.$conteudo->id) }}" class="btn btn-xs btn-info pull-right">
@@ -112,4 +113,11 @@
         </div>
     </div>
 </div>
+
+@else
+<div class="colunanao column">
+    <p class="feed_p">Não tens conteúdo</p>
+    <img id="sadnews" src="https://static.thenounproject.com/png/515962-200.png" />
+</div>
+@endif
 @endsection

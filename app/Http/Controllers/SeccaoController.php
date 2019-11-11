@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\SeccaoStoreRequest;
 use App\Http\Requests\SeccaoUpdateRequest;
+
 /**
  * @group API da Secção management
  * 
@@ -38,10 +39,9 @@ class SeccaoController extends Controller
 
         //return response($response, 200);
 
-        
-            return view('mostraseca')
-                ->with('seccoes', $seccao);
-       
+
+        return view('mostraseca')
+            ->with('seccoes', $seccao);
     }
 
     public function form()
@@ -84,16 +84,24 @@ class SeccaoController extends Controller
         ];
 
         //return response($response, 201);
-        return redirect()->route('lista_seccao',201);
+        return redirect()->route('lista_seccao', 201);
     }
 
 
 
-    public function formupdate($id)
+    public function formupdate(Request $request, $id)
     {
-        $seccao = Seccao::find($id);
-        return view('editseccao')
-            ->with('seccoes', $seccao);
+
+        $userID = $request->user();
+        $roleSession = $userID->role->name;
+
+        if ($userID->role->name === "reporter") {
+            abort(401, 'lista_seccao');
+        } else if ($userID->role->name === "admin" || $roleSession === "editor") {
+            $seccao = Seccao::find($id);
+            return view('editseccao')
+                ->with('seccoes', $seccao);
+        }
     }
     /**
      * Atualização de uma secção específica 
@@ -110,7 +118,7 @@ class SeccaoController extends Controller
     public function update(SeccaoUpdateRequest $request, Seccao $seccao)
     {
         $data = $request->all();
-        
+
         if ($request->hasFile('imagem_seccao')) {
 
             $file = $request->file('imagem_seccao')->store('images');
@@ -122,15 +130,22 @@ class SeccaoController extends Controller
 
         $seccao->update($data);
 
-        return redirect()->route('lista_seccao',201);
+        return redirect()->route('lista_seccao', 201);
     }
 
-    
-    public function formdelete($id)
+
+    public function formdelete(Request $request, $id)
     {
-        $seccao = Seccao::find($id);
-        $seccao->delete();
-        return redirect()->route('lista_seccao');
+        $userID = $request->user();
+        $roleSession = $userID->role->name;
+
+        if ($userID->role->name === "reporter") {
+            abort(401, 'lista_seccao');
+        } else if ($userID->role->name === "admin" || $roleSession === "editor") {
+            $seccao = Seccao::find($id);
+            $seccao->delete();
+            return redirect()->route('lista_seccao');
+        }
     }
 
     /**
