@@ -4,7 +4,7 @@
 <div class="container">
 
     <div class="row">
-        <a href="/" class="btn btn-xs btn-info pull-right">
+        <a href="/" class="btn_back btn btn-xs btn-info pull-right">
             Home
         </a>
     </div>
@@ -47,13 +47,13 @@
                             @auth        
                             @if (Auth::user()->role->name === "admin" || Auth::user()->role->name === "editor")
                                 <div class="col-sm">
-                                    <a href="{{ url('editar-jornal/'.$jornal->id) }}" class="btn btn-xs btn-info pull-right">
+                                    <a href="{{ url('editar-jornal/'.$jornal->id) }}" class="btn_editarSmall btn btn-xs btn-info pull-right">
                                         Editar Jornal
                                     </a>
                                 </div>
                                 @if (Auth::user()->role->name === "admin")
                                 <div class="col-sm">
-                                    <a class="btn_elimina_seccao" href="{{ url('elima-jornal/'.$jornal->id) }}" class="btn btn-xs btn-info pull-right">
+                                    <a href="{{ url('elima-jornal/'.$jornal->id) }}" class="btn_eliminaSmall btn btn-xs btn-info pull-right">
                                         Eliminar Jornal
                                     </a>
                                 </div>

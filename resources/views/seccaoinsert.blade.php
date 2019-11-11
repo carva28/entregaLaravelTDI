@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container">
-    <div class="col-md-2 col-md-offset-5">
-        <a href="{{ route('lista_seccao') }}" class="btn btn-xs btn-info pull-right">
-
-            Voltar lista seccção
-
-        </a>
-
+<div class="row justify-content-md-left">
+        <div class="col-md-auto">
+            <a href="{{ route('lista_seccao') }}" class="btn_back btn btn-xs btn-info pull-right">
+                Voltar atrás
+            </a>
+        </div>
     </div>
+    <br>
     <h2>Lista de Secções existentes</h2>
     <ul class="list-group2">
         
@@ -63,7 +63,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btnsubmeterseccao btn btn-primary">
                                     Submeter
                                 </button>
                             </div>

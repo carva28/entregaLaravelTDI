@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container_jornalnews container">
-<!-- <button onclick="theme('dark')">
+    <!-- <button onclick="theme('dark')">
     <span>Dark</span>
 </button>
 <script type="text/javascript">
@@ -29,8 +29,8 @@
                 @endif
                 @endforeach
                 @endforeach
-                <a class="nav-item nav-link" href="/">
-                    Voltar Home </p><span class="sr-only">(current)</span>
+                <a style="color:grey" class="nav-item nav-link" href="{{url('lista_jornais')}}">
+                    Voltar a ver Jornais </p><span class="sr-only">(current)</span>
                 </a>
             </div>
         </div>
@@ -47,10 +47,10 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                @foreach($noticias as $noticia)
-
-                <div class="card-header">
+            @if(!$noticias->isEmpty())
+            @foreach($noticias as $noticia)
+            <div id="cardSeccao" class=" card ">
+                <div id="headertitle" class="card-header">
                     <div class="row">
                         <p class="seccao_p"> {{ $noticia->titulo_noticia }}</p>
                     </div>
@@ -93,7 +93,7 @@
                                 <source src="/uploads/{{$conteudo->ficheiro_conteudo}}" type="audio/mpeg">
                                 Your browser does not support the audio tag.
                             </audio>
-                            
+
                         </div>
                         @endif
 
@@ -103,7 +103,7 @@
                         pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "jpg" ||
                         pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "jpeg")
                         <div class="media">
-                        <img class="img-fluid-jornalnews testeaudio-media-body media-body"  src="/uploads/{{$conteudo->ficheiro_conteudo}}" />
+                            <img class="img-fluid-jornalnews testeaudio-media-body media-body" src="/uploads/{{$conteudo->ficheiro_conteudo}}" />
                         </div>
                         @endif
 
@@ -111,25 +111,25 @@
                         @if(pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "mp4" ||
                         pathinfo($conteudo->ficheiro_conteudo, PATHINFO_EXTENSION) == "avi")
                         <div class="media">
-                        <video width="320" height="240" class="testeaudio-media-body media-body" controls>
-                            <source src="/uploads/{{$conteudo->ficheiro_conteudo}}" type="video/mp4">
+                            <video width="320" height="240" class="testeaudio-media-body media-body" controls>
+                                <source src="/uploads/{{$conteudo->ficheiro_conteudo}}" type="video/mp4">
 
-                            Your browser does not support the video tag.
-                        </video>
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                         @endif
                         @endif
                         @endforeach
                     </div>
                 </div>
-
-
-
-
-
-
-                @endforeach
             </div>
+            @endforeach
+            @else
+            <div class="colunanao column">
+                <p class="feed_p">Este jornal esta em desenvolvimento</p>
+                <img class="imgtable" id="nocontent" src="../images/none_content/newspaper(1).png" />
+            </div>
+            @endif
         </div>
     </div>
 

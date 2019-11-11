@@ -8,7 +8,7 @@ use App\ContentImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\ContentImageStoreRequest;
-
+use Illuminate\Support\Facades\DB;
 class ContentImageController extends Controller
 {
     /**
@@ -18,9 +18,12 @@ class ContentImageController extends Controller
      */
     public function index()
     {
-
+        
         $jornal = Jornal::all();
-        $imagenseditadas = ContentImage::with('jornal')->get();
+        //$all=DB::table('jornals')->paginate(4);
+        //dd($all);
+        //$imagenseditadas = ContentImage::with('jornal')->get();
+        $imagenseditadas = ContentImage::with('jornal')->paginate(8);
         $response = [
             'data' => $imagenseditadas,
             'jornais' => $jornal,

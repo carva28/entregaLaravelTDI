@@ -4,7 +4,7 @@
 <div class="container">
 
     <div class="row">
-        <a href="/" class="btn btn-xs btn-info pull-right">
+        <a href="/" class="btn_back btn btn-xs btn-info pull-right">
             Home
         </a>
     </div>
@@ -35,8 +35,15 @@
         @endif
     </div>
     <div class="row justify-content-center">
+
         <div class="col-md-8">
             <div class="card">
+                @auth
+                @if(Auth::user()->role->name === "admin" ||
+                Auth::user()->role->name === "editor" ||
+                Auth::user()->role->name === "reporter")
+                @endif
+                @endauth
                 @if(!$conteudos->isEmpty())
                 @foreach($conteudos as $conteudo)
 
@@ -85,14 +92,14 @@
                             <div class="row2">
 
                                 <div class="col-sm">
-                                    <a href="{{ url('editar-conteudo/'.$conteudo->id) }}" class="btn btn-xs btn-info pull-right">
+                                    <a href="{{ url('editar-conteudo/'.$conteudo->id) }}" class="btn_editarSmall btn btn-xs btn-info pull-right">
                                         Editar Conteudo
                                     </a>
                                 </div>
                                 @auth
                                 @if (Auth::user()->role->name === "admin")
                                 <div class="col-sm">
-                                    <a class="btn_elimina_seccao" href="{{ url('elima-conteudo/'.$conteudo->id) }}" class="btn btn-xs btn-info pull-right">
+                                    <a href="{{ url('elima-conteudo/'.$conteudo->id) }}" class="btn_eliminaSmall btn btn-xs btn-info pull-right">
                                         Eliminar Conteudo
 
                                     </a>

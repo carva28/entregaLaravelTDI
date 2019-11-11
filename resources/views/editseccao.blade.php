@@ -3,10 +3,8 @@
 @section('content')
 <div class="container">
     <div class="col-md-2 col-md-offset-5">
-        <a href="{{ route('lista_seccao') }}" class="btn btn-xs btn-info pull-right">
-
+        <a href="{{ route('lista_seccao') }}" class="btn_back btn btn-xs btn-info pull-right">
             Voltar página seccção
-
         </a>
 
     </div>
@@ -56,7 +54,7 @@
                                     Submeter
                                 </button>
 
-                                <a href="{{ route('lista_seccao') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                                <a href="{{ route('lista_seccao') }}" class="btn_eliminaSmall btn btn-xs btn-info pull-right">
                                     Cancelar
                                 </a>
                             </div>

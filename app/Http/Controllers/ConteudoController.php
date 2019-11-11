@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 /**
  * @group API do Conteudo
  * 
@@ -26,8 +27,14 @@ class ConteudoController extends Controller
      */
     public function index(Request $request)
     {
-        $userID = $request->user()->id;
-        $conteudo = Conteudo::with('noticia')->where('user_id', $userID)->get();
+        $userRole = $request->user()->role->name;
+        if ($userRole === "admin") {
+            $conteudo = Conteudo::with('noticia')->get();
+        } else {
+            $userID = $request->user()->id;
+            $conteudo = Conteudo::with('noticia')->where('user_id', $userID)->get();
+        }
+
         $response = [
             'data' => $conteudo,
             'message' => 'Listagem de conteudos',
@@ -189,7 +196,7 @@ class ConteudoController extends Controller
     }
 
 
-    public function formdelete(Request $request,$id)
+    public function formdelete(Request $request, $id)
     {
         $conteudo = Conteudo::find($id);
         $conteudo->delete();
@@ -201,9 +208,9 @@ class ConteudoController extends Controller
             'message' => 'Conteudo eliminado',
             'result' => 'OK'
         ];
-       
-            return view('feedconteudo')
-                ->with('conteudos', $response['data'])->with('messages', $response['message']);
+
+        return view('feedconteudo')
+            ->with('conteudos', $response['data'])->with('messages', $response['message']);
     }
 
 
@@ -223,7 +230,7 @@ class ConteudoController extends Controller
     //     $conteudo->delete();
     //     return "deleted";
     // }
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         $conteudo = Conteudo::find($id);
         $conteudo->delete();
@@ -235,9 +242,8 @@ class ConteudoController extends Controller
             'message' => 'Conteudo eliminado',
             'result' => 'OK'
         ];
-        
-            return view('feedconteudo')
-                ->with('conteudos', $response['data'])->with('messages', $response['message']);
-       
+
+        return view('feedconteudo')
+            ->with('conteudos', $response['data'])->with('messages', $response['message']);
     }
 }

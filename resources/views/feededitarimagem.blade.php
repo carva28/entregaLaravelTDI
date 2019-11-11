@@ -1,19 +1,27 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <div class="row justify-content-md-center">
-        <div class="col-md-auto">
-            <a href="/" class="btn btn-xs btn-info pull-right">
-                Voltar para trás
-            </a>
-            <a href="{{ route('insert-editarimagem') }}" class="btn_edit btn-xs btn-info pull-right">
-                Editar Imagem
-            </a>
-        </div>
+    <div class="row">
+        <a href="/" class="btn_back btn btn-xs btn-info pull-right">
+            Home
+        </a>
     </div>
 
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
 
+            <a href="{{ route('insert-editarimagem') }}" class="btnsubmeterseccao btn-xs btn-info pull-right">
+                Inserir e editar imagem
+            </a>
+        </div>
 
+    </div>
+
+    <br><br>
+    <div class="row justify-content-md-center">
+
+        <h2>Imagens editadas</h2>
+    </div>
     <div class="row justify-content-md-center">
 
         @foreach($imagenseditadas as $imagenseditada)
@@ -27,11 +35,14 @@
         </div>
         @endif
         @endforeach
-
-
-
         @endforeach
     </div>
+    <div id="pagination" class="row justify-content-md-center">
+        <div class="col-md-auto">
+            {!! $imagenseditadas->links() !!}
+        </div>
 
+    </div>
 </div>
+
 @endsection

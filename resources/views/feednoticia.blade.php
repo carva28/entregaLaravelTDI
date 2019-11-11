@@ -4,7 +4,7 @@
 <div class="container">
 
     <div class="row">
-        <a href="/" class="btn btn-xs btn-info pull-right">
+        <a href="/" class="btn_back btn btn-xs btn-info pull-right">
             Home
         </a>
     </div>
@@ -16,7 +16,13 @@
         </div>
     </div>
     <div class="row justify-content-center">
-    @if(!$noticias->isEmpty())
+        @auth
+        @if(Auth::user()->role->name === "admin" ||
+        Auth::user()->role->name === "editor" ||
+        Auth::user()->role->name === "reporter")
+        @endif
+        @endauth
+        @if(!$noticias->isEmpty())
         <table class="table">
             <thead>
                 <tr>
@@ -29,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                
+
                 @foreach($noticias as $noticia)
 
                 <tr>
@@ -43,12 +49,12 @@
                     <td>
 
                         <div class="col-sm">
-                            <a href="{{ url('editar-noticia/'.$noticia->id) }}" class="btn btn-xs btn-info pull-right">
+                            <a href="{{ url('editar-noticia/'.$noticia->id) }}" class="btn_editarSmall btn btn-xs btn-info pull-right">
                                 Editar Notícia
                             </a>
                             @if (Auth::user()->role->name === "admin" ||
                             Auth::user()->role->name === "editor")
-                            <a class="btn_elimina_seccao" href="{{ url('elima-noticia/'.$noticia->id) }}" class="btn btn-xs btn-info pull-right">
+                            <a style="margin-top: 10px;" href="{{ url('elima-noticia/'.$noticia->id) }}" class="btn_eliminaSmall btn btn-xs btn-info pull-right">
                                 Eliminar Notícia
                             </a>
                         </div>
@@ -61,8 +67,8 @@
                 @endforeach
                 @else
                 <div class="colunanao column">
-                <p class="feed_p">Não tens conteúdo</p>
-                <img class="imgtable" id="sadnews" src="https://static.thenounproject.com/png/515962-200.png" />
+                    <p class="feed_p">Não tens conteúdo</p>
+                    <img class="imgtable" id="sadnews" src="https://static.thenounproject.com/png/515962-200.png" />
                 </div>
                 @endif
     </div>

@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row justify-content-md-left">
         <div class="col-md-auto">
-            <a href="/" class="btn_back btn btn-xs btn-info pull-right">
+            <a href="{{ route('lista_editarimagem') }}" class="btn_back btn btn-xs btn-info pull-right">
                 Voltar atrás
             </a>
         </div>
@@ -98,7 +98,7 @@
         {{ csrf_field() }}
         <div class="form-group row mb-0">
             <div class="coluna_btn col-md-6 offset-md-4">
-                <button type="submit" class="btn_add_editar btn btn-primary">
+                <button type="submit" class="btnsubmeterseccao btn btn-primary">
                     Adiconar
                 </button>
             </div>

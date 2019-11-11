@@ -30,10 +30,14 @@ class NoticiaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $userID = $request->user()->id;
-        $noticia = Noticia::with('jornal')->with('seccao')->with('user')->where('user_id', $userID)->get();;
-    
+    {   
+        $userRole = $request->user()->role->name;
+        if ($userRole === "admin") {
+            $noticia = Noticia::with('jornal')->with('seccao')->with('user')->get();
+         } else {
+            $userID = $request->user()->id;
+            $noticia = Noticia::with('jornal')->with('seccao')->with('user')->where('user_id', $userID)->get();;
+        }
         $response = [
             'data' => $noticia,
             'message' => 'Listagem de Noticias',
@@ -41,8 +45,7 @@ class NoticiaController extends Controller
         ];
 
         return view('feednoticia')
-                ->with('noticias', $noticia);
-        
+            ->with('noticias', $noticia);
     }
 
     public function form()
@@ -87,7 +90,7 @@ class NoticiaController extends Controller
             'message' => 'Noticia adicionada',
             'result' => 'OK'
         ];
-        
+
         return redirect()->route('lista_noticia', 201);
     }
 
@@ -110,7 +113,7 @@ class NoticiaController extends Controller
         $jornal = Jornal::all();
         $seccao = Seccao::all();
         $users = User::all();
-        
+
         return view('editnoticia')
             ->with('noticias', $noticia)
             ->with('jornais', $jornal)->with('seccaos', $seccao)->with('users', $users);
@@ -185,7 +188,7 @@ class NoticiaController extends Controller
 
     public function juncao($id)
     {
-        $noticia = DB::table('noticias')->where('jornal_id', $id)->get();
+        $noticia = DB::table('noticias')->where('jornal_id', $id)->whereNull('deleted_at')->get();
         $secjornal = Noticia::with('seccao')->select('seccao_id')->distinct()->where('jornal_id', $id)->get();
 
         $jornal = Jornal::find($id);
@@ -217,6 +220,7 @@ class NoticiaController extends Controller
             ->with('seccaos', $seccao)
             ->with('users', $users)
             ->with('secjornals', $secjornal)
-            ->with('noticiasseccao', $shownoticias);
+            ->with('noticiasseccao', $shownoticias)
+            ->with('seccaoatual', $idSeccao);
     }
 }

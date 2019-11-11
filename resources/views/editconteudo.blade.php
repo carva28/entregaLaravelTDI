@@ -1,13 +1,14 @@
 @extends('layouts.app') @section('content')
 
 <div class="container">
-    <div class="col-md-2 col-md-offset-5">
-        <a href="{{ route('lista_conteudo') }}" class="btn btn-xs btn-info pull-right">
-            Voltar feed conteudos
-        </a>
-
+    <div class="row justify-content-md-left">
+        <div class="col-md-auto">
+            <a href="{{ route('lista_conteudo') }}" class="btn_back btn btn-xs btn-info pull-right">
+                Voltar atrás
+            </a>
+        </div>
     </div>
-
+    <br>
     <div class="row_conteudos row justify-content-center">
 
         <div class="coluna_conteudos col-md-8">
@@ -166,7 +167,7 @@
                                 Editar
                             </button>
 
-                            <a href="{{ route('lista_conteudo') }}" class="btn_edit_cancelar_content btncandelarseccao btn btn-xs btn-info pull-right">
+                            <a href="{{ route('lista_conteudo') }}" class="btn_eliminaSmall btncandelarseccao btn btn-xs btn-info pull-right">
                                 Cancelar
                             </a>
                         </div>

@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="col-md-2 col-md-offset-5">
-        <a href="{{ route('lista_conteudo') }}" class="btn btn-xs btn-info pull-right">
-
-            Voltar lista de conteudos
-
-        </a>
-
+<div class="container"> <div class="row justify-content-md-left">
+        <div class="col-md-auto">
+            <a href="{{ route('lista_conteudo') }}" class="btn_back btn btn-xs btn-info pull-right">
+                Voltar atrás
+            </a>
+        </div>
     </div>
-
+    <br>
     <div class="row justify-content-center">
 
         <div class="insert_content col-md-8">
@@ -101,8 +99,8 @@
 
                             <div class="form-group row mb-0">
                                 <div class="btn_insert_content col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Submeter
+                                    <button type="submit" class="btnsubmeterseccao btn btn-primary">
+                                        Adicionar
                                     </button>
                                 </div>
                             </div>
