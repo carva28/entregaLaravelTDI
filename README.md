@@ -18,6 +18,12 @@ email | password
 admin@tdi.pt| admin123       
 
 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 7. Poderá explorar a API através do link http://localhost:{porta_do_seu_serivço}/docs
 8. Este projeto tem como objetivo a produção de conteúdo jornalísitico por parte dos reporteres e editores, sendo que o editor pode criar um jornal mas o reporter não. Porém todos podem editar uma fotografia.
 ___
