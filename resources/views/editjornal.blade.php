@@ -19,8 +19,8 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('update-jornal', $jornais->id) }}" enctype="multipart/form-data">
-                        @csrf
-                        @method('put')
+                    {{ csrf_field() }}
+                        {{method_field('put')}}
                         <input type="hidden" name="_method" value="put">
                         <div class="form-group row">
                             <label for="name_jornal" class="col-md-4 col-form-label text-md-right">Nome do Jornal</label>

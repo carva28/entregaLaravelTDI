@@ -16,11 +16,11 @@
                 <div class="card-header">Editar Conteudo</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('update-conteudo', $conteudos->id) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('update-conteudo', $conteudos->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('put')
-
                         <input type="hidden" name="_method" value="put">
+
 
                         <div class="form-group row">
                             <label for="tipo_conteudo" class="col-md-4 col-form-label text-md-right">Tipo de conteudo</label>

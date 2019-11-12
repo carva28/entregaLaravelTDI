@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Conteudo;
+use App\Http\Requests\ConteudoUpdateRequest;
 use App\Noticia;
 use App\User;
 use Illuminate\Support\Facades\Validator;
@@ -162,24 +163,25 @@ class ConteudoController extends Controller
      * @param  \App\Conteudo  $conteudo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Conteudo $conteudo)
+    public function update(ConteudoUpdateRequest $request,Conteudo $conteudo)
     {
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'tipo_conteudo' => 'string|max:60',
-            'ficheiro_conteudo' => 'mimes:mpga,mp3,mp4,avi,jpg,jpeg,png,gif',
-            'noticia_id' => 'exists:noticias,id',
-            'user_id' => 'exists:users,id',
-        ]);
+        
+        // $validator = Validator::make($data, [
+        //     'tipo_conteudo' => 'string|max:60',
+        //     'ficheiro_conteudo' => 'mimes:mpga,mp3,mp4,avi,jpg,jpeg,png,gif',
+        //     'noticia_id' => 'exists:noticias,id',
+        //     'user_id' => 'exists:users,id',
+        // ]);
 
-        if ($validator->fails()) {
-            return $validator->errors()->all();
-        }
-        if ($request->hasFile('ficheiro_conteudo')) {
-            $file = $request->file('ficheiro_conteudo')->store('ficheiros_conteudos');
-            $data['ficheiro_conteudo'] = $file;
-        }
+        // if ($validator->fails()) {
+        //     return $validator->errors()->all();
+        // }
+        // if ($request->hasFile('ficheiro_conteudo')) {
+        //     $file = $request->file('ficheiro_conteudo')->store('ficheiros_conteudos');
+        //     $data['ficheiro_conteudo'] = $file;
+        // }
 
         $userID = $request->user()->id;
         $conteudo->update($data);
