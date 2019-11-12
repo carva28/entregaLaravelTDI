@@ -18,6 +18,7 @@ Projeto com base nas tecnologias:
 | email        | password  | 
 | ------------- |:-------------:| 
 | admin@tdi.pt     | admin123 |
+| editor2@tdi.pt    | 12345678 |
 
 
 7. Poderá explorar a API através do link http://localhost:{porta_do_seu_serivço}/docs
