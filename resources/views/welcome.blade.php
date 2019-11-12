@@ -131,6 +131,9 @@
                     Editar Imagem
                 </a>
 
+                <a href="{{ route('lista_temajornal') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
+                    Ver tema jornal
+                </a>
                 <!-- @else(Auth::user()->role->name === "reporter")
                 <a href="{{ route('lista_jornais') }}" class="btncandelarseccao btn btn-xs btn-info pull-right">
                     Ver jornal digital

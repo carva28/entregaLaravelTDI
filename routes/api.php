@@ -27,3 +27,5 @@ Route::resource('seccao', 'API\APISeccaoController');
 Route::resource('conteudo', 'API\APIConteudoController');
 Route::resource('content_image', 'API\APIContentImageController');
 Route::resource('jornal','API\APIJornalController'); //o modelo tipo post, segundo parametro controlador que gere as rotas
+Route::resource('tema','API\APITemaController');
+Route::resource('temajornal','API\APITemaJornalController');

@@ -35,7 +35,7 @@ HTTP Response
 ```bash
 curl -X GET -G "http://localhost/api/noticia" \
     -H "Content-Type: application/json" \
-    -d '{"200":5}'
+    -d '{"200":6}'
 
 ```
 
@@ -48,7 +48,7 @@ let headers = {
 }
 
 let body = {
-    "200": 5
+    "200": 6
 }
 
 fetch(url, {
@@ -70,11 +70,11 @@ fetch(url, {
             "id": 1,
             "titulo_noticia": "Reforma nos dias de hoje é válida?",
             "corpo_noticia": "Hoje em dia nao ha reforma porque somos roubados",
-            "user_id": 4,
+            "user_id": 1,
             "jornal_id": 1,
-            "seccao_id": 1,
+            "seccao_id": 3,
             "created_at": "2019-11-04 00:14:32",
-            "updated_at": "2019-11-10 15:49:58",
+            "updated_at": "2019-11-12 11:11:26",
             "deleted_at": null,
             "jornal": {
                 "id": 1,
@@ -86,20 +86,20 @@ fetch(url, {
                 "deleted_at": null
             },
             "seccao": {
-                "id": 1,
-                "nome_seccao": "Cultura",
-                "imagem_seccao": "images\/HAWX8OG1L1647PTuP9kU5FVh8xTGGT8WaO1vXhfx.png",
-                "created_at": "2019-11-04 00:02:07",
-                "updated_at": "2019-11-10 01:43:34",
+                "id": 3,
+                "nome_seccao": "Economia",
+                "imagem_seccao": "images\/ySreEWJIstOLoNz0Y3a4z720PhTYDTAH8sFxCgrB.png",
+                "created_at": "2019-11-04 12:16:38",
+                "updated_at": "2019-11-04 15:51:53",
                 "deleted_at": null
             },
             "user": {
-                "id": 4,
-                "name": "Selena Becker I",
-                "username": "damore",
-                "email": "weber.sabina@example.com",
-                "email_verified_at": "2019-11-03 23:58:30",
-                "role_id": 3,
+                "id": 1,
+                "name": "Administrator",
+                "username": "admintdi",
+                "email": "admin@tdi.pt",
+                "email_verified_at": null,
+                "role_id": 1,
                 "created_at": "2019-11-03 23:58:30",
                 "updated_at": "2019-11-03 23:58:30",
                 "deleted_at": null
@@ -403,7 +403,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/noticia/create" \
     -H "Content-Type: application/json" \
-    -d '{"message":"aut"}'
+    -d '{"message":"eius"}'
 
 ```
 
@@ -416,7 +416,7 @@ let headers = {
 }
 
 let body = {
-    "message": "aut"
+    "message": "eius"
 }
 
 fetch(url, {
@@ -456,7 +456,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/noticia" \
     -H "Content-Type: application/json" \
-    -d '{"titulo_noticia":"ut","corpo_noticia":"qui","jornal_id":14,"seccao_id":19,"user_id":4}'
+    -d '{"titulo_noticia":"ea","corpo_noticia":"quasi","jornal_id":13,"seccao_id":13,"user_id":16}'
 
 ```
 
@@ -469,11 +469,11 @@ let headers = {
 }
 
 let body = {
-    "titulo_noticia": "ut",
-    "corpo_noticia": "qui",
-    "jornal_id": 14,
-    "seccao_id": 19,
-    "user_id": 4
+    "titulo_noticia": "ea",
+    "corpo_noticia": "quasi",
+    "jornal_id": 13,
+    "seccao_id": 13,
+    "user_id": 16
 }
 
 fetch(url, {
@@ -535,11 +535,11 @@ fetch(url, {
     "id": 1,
     "titulo_noticia": "Reforma nos dias de hoje é válida?",
     "corpo_noticia": "Hoje em dia nao ha reforma porque somos roubados",
-    "user_id": 4,
+    "user_id": 1,
     "jornal_id": 1,
-    "seccao_id": 1,
+    "seccao_id": 3,
     "created_at": "2019-11-04 00:14:32",
-    "updated_at": "2019-11-10 15:49:58",
+    "updated_at": "2019-11-12 11:11:26",
     "deleted_at": null
 }
 ```
@@ -599,18 +599,18 @@ sobre a mesma
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/noticia/1?titulo_noticia=consequatur&corpo_noticia=accusamus&jornal_id=sunt&seccao_id=illo&user_id=esse" 
+curl -X PUT "http://localhost/api/noticia/1?titulo_noticia=vel&corpo_noticia=sed&jornal_id=ipsum&seccao_id=omnis&user_id=consequatur" 
 ```
 
 ```javascript
 const url = new URL("http://localhost/api/noticia/1");
 
     let params = {
-            "titulo_noticia": "consequatur",
-            "corpo_noticia": "accusamus",
-            "jornal_id": "sunt",
-            "seccao_id": "illo",
-            "user_id": "esse",
+            "titulo_noticia": "vel",
+            "corpo_noticia": "sed",
+            "jornal_id": "ipsum",
+            "seccao_id": "omnis",
+            "user_id": "consequatur",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -696,7 +696,7 @@ HTTP Response
 ```bash
 curl -X GET -G "http://localhost/api/content_image" \
     -H "Content-Type: application/json" \
-    -d '{"200":8}'
+    -d '{"200":9}'
 
 ```
 
@@ -709,7 +709,7 @@ let headers = {
 }
 
 let body = {
-    "200": 8
+    "200": 9
 }
 
 fetch(url, {
@@ -789,7 +789,7 @@ fetch(url, {
 ```bash
 curl -X POST "http://localhost/api/content_image" \
     -H "Content-Type: application/json" \
-    -d '{"ficheiro_image":"quis","jornal_id":882006.8452061279676854610443115234375,"effectvalue":"ut"}'
+    -d '{"ficheiro_image":"similique","jornal_id":2687.33868742999993628473021090030670166015625,"effectvalue":"soluta"}'
 
 ```
 
@@ -802,9 +802,9 @@ let headers = {
 }
 
 let body = {
-    "ficheiro_image": "quis",
-    "jornal_id": 882006.8452061279676854610443115234375,
-    "effectvalue": "ut"
+    "ficheiro_image": "similique",
+    "jornal_id": 2687.33868742999993628473021090030670166015625,
+    "effectvalue": "soluta"
 }
 
 fetch(url, {
@@ -1009,7 +1009,7 @@ HTTP Response
 ```bash
 curl -X GET -G "http://localhost/api/conteudo" \
     -H "Content-Type: application/json" \
-    -d '{"200":14}'
+    -d '{"200":1}'
 
 ```
 
@@ -1022,7 +1022,7 @@ let headers = {
 }
 
 let body = {
-    "200": 14
+    "200": 1
 }
 
 fetch(url, {
@@ -1338,7 +1338,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/conteudo" \
     -H "Content-Type: application/json" \
-    -d '{"tipo_conteudo":"in","ficheiro_conteudo":"delectus","noticia_id":4,"user_id":12}'
+    -d '{"tipo_conteudo":"totam","ficheiro_conteudo":"consequuntur","noticia_id":3,"user_id":14}'
 
 ```
 
@@ -1351,10 +1351,10 @@ let headers = {
 }
 
 let body = {
-    "tipo_conteudo": "in",
-    "ficheiro_conteudo": "delectus",
-    "noticia_id": 4,
-    "user_id": 12
+    "tipo_conteudo": "totam",
+    "ficheiro_conteudo": "consequuntur",
+    "noticia_id": 3,
+    "user_id": 14
 }
 
 fetch(url, {
@@ -1431,17 +1431,17 @@ sobre o conteúdo
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/conteudo/1?tipo_conteudo=sint&ficheiro_conteudo=voluptatum&noticia_id=aut&user_id=quas" 
+curl -X PUT "http://localhost/api/conteudo/1?tipo_conteudo=maxime&ficheiro_conteudo=in&noticia_id=nobis&user_id=corporis" 
 ```
 
 ```javascript
 const url = new URL("http://localhost/api/conteudo/1");
 
     let params = {
-            "tipo_conteudo": "sint",
-            "ficheiro_conteudo": "voluptatum",
-            "noticia_id": "aut",
-            "user_id": "quas",
+            "tipo_conteudo": "maxime",
+            "ficheiro_conteudo": "in",
+            "noticia_id": "nobis",
+            "user_id": "corporis",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -1527,7 +1527,7 @@ HTTP Response
 ```bash
 curl -X GET -G "http://localhost/api/jornal" \
     -H "Content-Type: application/json" \
-    -d '{"200":5}'
+    -d '{"200":12}'
 
 ```
 
@@ -1540,7 +1540,7 @@ let headers = {
 }
 
 let body = {
-    "200": 5
+    "200": 12
 }
 
 fetch(url, {
@@ -1677,6 +1677,26 @@ fetch(url, {
                 "updated_at": "2019-11-08 23:20:00",
                 "deleted_at": null
             }
+        },
+        {
+            "id": 13,
+            "name_jornal": "Teste",
+            "description": "sdf",
+            "user_id": 24,
+            "created_at": "2019-11-12 17:12:51",
+            "updated_at": "2019-11-12 17:12:51",
+            "deleted_at": null,
+            "user": {
+                "id": 24,
+                "name": "Sofia",
+                "username": "sophz",
+                "email": "sophz@tdi.pt",
+                "email_verified_at": null,
+                "role_id": 2,
+                "created_at": "2019-11-08 23:20:00",
+                "updated_at": "2019-11-08 23:20:00",
+                "deleted_at": null
+            }
         }
     ],
     "message": "Listagem de jornais",
@@ -1743,7 +1763,7 @@ fetch(url, {
 ```bash
 curl -X POST "http://localhost/api/jornal" \
     -H "Content-Type: application/json" \
-    -d '{"name_jornal":"minima","description":"voluptas","user_id":8}'
+    -d '{"name_jornal":"consequuntur","description":"doloribus","user_id":20}'
 
 ```
 
@@ -1756,9 +1776,9 @@ let headers = {
 }
 
 let body = {
-    "name_jornal": "minima",
-    "description": "voluptas",
-    "user_id": 8
+    "name_jornal": "consequuntur",
+    "description": "doloribus",
+    "user_id": 20
 }
 
 fetch(url, {
@@ -1882,16 +1902,16 @@ sobre o mesmo
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/jornal/1?name_jornal=ut&description=dicta&user_id=velit" 
+curl -X PUT "http://localhost/api/jornal/1?name_jornal=consequatur&description=ratione&user_id=molestiae" 
 ```
 
 ```javascript
 const url = new URL("http://localhost/api/jornal/1");
 
     let params = {
-            "name_jornal": "ut",
-            "description": "dicta",
-            "user_id": "velit",
+            "name_jornal": "consequatur",
+            "description": "ratione",
+            "user_id": "molestiae",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -1975,7 +1995,7 @@ HTTP Response
 ```bash
 curl -X GET -G "http://localhost/api/seccao" \
     -H "Content-Type: application/json" \
-    -d '{"200":15}'
+    -d '{"200":13}'
 
 ```
 
@@ -1988,7 +2008,7 @@ let headers = {
 }
 
 let body = {
-    "200": 15
+    "200": 13
 }
 
 fetch(url, {
@@ -2071,7 +2091,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/seccao" \
     -H "Content-Type: application/json" \
-    -d '{"nome_seccao":"ea","imagem_seccao":"velit"}'
+    -d '{"nome_seccao":"minus","imagem_seccao":"eligendi"}'
 
 ```
 
@@ -2084,8 +2104,8 @@ let headers = {
 }
 
 let body = {
-    "nome_seccao": "ea",
-    "imagem_seccao": "velit"
+    "nome_seccao": "minus",
+    "imagem_seccao": "eligendi"
 }
 
 fetch(url, {
@@ -2120,15 +2140,15 @@ sobre a mesma
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/seccao/1?nome_seccao=est&imagem_seccao=voluptate" 
+curl -X PUT "http://localhost/api/seccao/1?nome_seccao=fugiat&imagem_seccao=illum" 
 ```
 
 ```javascript
 const url = new URL("http://localhost/api/seccao/1");
 
     let params = {
-            "nome_seccao": "est",
-            "imagem_seccao": "voluptate",
+            "nome_seccao": "fugiat",
+            "imagem_seccao": "illum",
         };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -2196,5 +2216,953 @@ fetch(url, {
 
 
 <!-- END_93f52473e766962fb6e3ef5b7362a130 -->
+
+#API do Tema de personalização do jornal
+
+
+APIs para gerir temas
+<!-- START_e15d622d2c1cc9b6028629590d26ebc3 -->
+## Apresenta dos temas de personalização dos jornais
+
+HTTP Response
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/tema" \
+    -H "Content-Type: application/json" \
+    -d '{"200":5}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/tema");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "200": 5
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "nome_tema": "dark",
+            "created_at": "2019-11-12 11:02:10",
+            "updated_at": "2019-11-12 11:02:10",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "nome_tema": "green",
+            "created_at": "2019-11-12 11:02:25",
+            "updated_at": "2019-11-12 11:42:22",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "nome_tema": "rose",
+            "created_at": "2019-11-12 11:40:42",
+            "updated_at": "2019-11-12 11:40:42",
+            "deleted_at": null
+        },
+        {
+            "id": 6,
+            "nome_tema": "Sweet",
+            "created_at": "2019-11-12 14:02:33",
+            "updated_at": "2019-11-12 14:02:33",
+            "deleted_at": null
+        }
+    ],
+    "message": "Listagem de temas",
+    "result": "OK"
+}
+```
+
+### HTTP Request
+`GET api/tema`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    200 | integer |  optional  | OK -> mostra a informação
+
+<!-- END_e15d622d2c1cc9b6028629590d26ebc3 -->
+
+<!-- START_9b074c9bede6dcf60e337a8a6c66e4a6 -->
+## Show the form for creating a new resource.
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/tema/create" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/tema/create");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response:
+
+```json
+null
+```
+
+### HTTP Request
+`GET api/tema/create`
+
+
+<!-- END_9b074c9bede6dcf60e337a8a6c66e4a6 -->
+
+<!-- START_dc99fdadeadba564ccfa628d3230481b -->
+## Inserir um tema na Base de dados.
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/tema" \
+    -H "Content-Type: application/json" \
+    -d '{"nometema":"ad"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/tema");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "nometema": "ad"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/tema`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    nometema | string |  required  | necessário ter um nome para o tema
+
+<!-- END_dc99fdadeadba564ccfa628d3230481b -->
+
+<!-- START_e0d9f141c49734c6967cf330bb543453 -->
+## Apresentar um tema específico
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/tema/1" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/tema/1");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 1,
+    "nome_tema": "dark",
+    "created_at": "2019-11-12 11:02:10",
+    "updated_at": "2019-11-12 11:02:10",
+    "deleted_at": null
+}
+```
+
+### HTTP Request
+`GET api/tema/{tema}`
+
+
+<!-- END_e0d9f141c49734c6967cf330bb543453 -->
+
+<!-- START_6ab6754c1fd9b6a905e550c264f7c3e9 -->
+## Apresentação do form para editar um tema específico
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/tema/1/edit" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/tema/1/edit");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "seccoes": [
+        {
+            "id": 1,
+            "nome_tema": "dark",
+            "created_at": "2019-11-12 11:02:10",
+            "updated_at": "2019-11-12 11:02:10",
+            "deleted_at": null
+        }
+    ],
+    "message": "Form de atualizar temas",
+    "result": "OK"
+}
+```
+
+### HTTP Request
+`GET api/tema/{tema}/edit`
+
+
+<!-- END_6ab6754c1fd9b6a905e550c264f7c3e9 -->
+
+<!-- START_bc7bae02cd8ee1d4ac9ede16880ea23f -->
+## Atualização de um tema específico
+
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/tema/1?nome_tema=voluptates" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/tema/1");
+
+    let params = {
+            "nome_tema": "voluptates",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/tema/{tema}`
+
+`PATCH api/tema/{tema}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    nome_tema |  required  | nome do tema que pretende adicionar
+
+<!-- END_bc7bae02cd8ee1d4ac9ede16880ea23f -->
+
+<!-- START_1e7d52fa883beabf6d1e36016c81f787 -->
+## Eliminar uma notícia específica
+
+Ao clique no botão de eliminar Secção, o ID dessa mesma irá
+ser eliminado da base de dados
+
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/tema/1" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/tema/1");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/tema/{tema}`
+
+
+<!-- END_1e7d52fa883beabf6d1e36016c81f787 -->
+
+#API do tema do jornal
+
+
+ APIs para gerir os temas dos jornais
+<!-- START_57c54d728d3d74001178760afbf00d03 -->
+## Apresentação das notícias realizadas por grandes repórteres.
+
+Interpretação apresentação da associção do tema ao respetivo jornal
+HTTP Response
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/temajornal" \
+    -H "Content-Type: application/json" \
+    -d '{"200":9}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/temajornal");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "200": 9
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "jornal_id": 1,
+            "tema_id": 1,
+            "created_at": "2019-11-12 12:24:35",
+            "updated_at": "2019-11-12 12:30:15",
+            "deleted_at": null,
+            "jornal": {
+                "id": 1,
+                "name_jornal": "Jornal da Escolas",
+                "description": "Este Jornal pertence à escola EB2\/3 de Guimarãesssss",
+                "user_id": 2,
+                "created_at": "2019-11-04 00:13:08",
+                "updated_at": "2019-11-09 21:53:25",
+                "deleted_at": null
+            },
+            "tema": {
+                "id": 1,
+                "nome_tema": "dark",
+                "created_at": "2019-11-12 11:02:10",
+                "updated_at": "2019-11-12 11:02:10",
+                "deleted_at": null
+            }
+        },
+        {
+            "id": 2,
+            "jornal_id": 2,
+            "tema_id": 6,
+            "created_at": "2019-11-12 12:28:06",
+            "updated_at": "2019-11-12 16:48:20",
+            "deleted_at": null,
+            "jornal": {
+                "id": 2,
+                "name_jornal": "Noticarte",
+                "description": "Escola Secundária de Aveiro, tem alunos muito proativos",
+                "user_id": 4,
+                "created_at": "2019-11-04 00:13:45",
+                "updated_at": "2019-11-09 23:16:55",
+                "deleted_at": null
+            },
+            "tema": {
+                "id": 6,
+                "nome_tema": "Sweet",
+                "created_at": "2019-11-12 14:02:33",
+                "updated_at": "2019-11-12 14:02:33",
+                "deleted_at": null
+            }
+        },
+        {
+            "id": 5,
+            "jornal_id": 9,
+            "tema_id": 4,
+            "created_at": "2019-11-12 14:30:36",
+            "updated_at": "2019-11-12 14:30:36",
+            "deleted_at": null,
+            "jornal": {
+                "id": 9,
+                "name_jornal": "FiloSofá 2",
+                "description": "Leia descontraído o seu jornal",
+                "user_id": 24,
+                "created_at": "2019-11-10 12:16:41",
+                "updated_at": "2019-11-10 12:21:40",
+                "deleted_at": null
+            },
+            "tema": {
+                "id": 4,
+                "nome_tema": "rose",
+                "created_at": "2019-11-12 11:40:42",
+                "updated_at": "2019-11-12 11:40:42",
+                "deleted_at": null
+            }
+        },
+        {
+            "id": 9,
+            "jornal_id": 13,
+            "tema_id": 2,
+            "created_at": "2019-11-12 17:14:30",
+            "updated_at": "2019-11-12 17:14:30",
+            "deleted_at": null,
+            "jornal": {
+                "id": 13,
+                "name_jornal": "Teste",
+                "description": "sdf",
+                "user_id": 24,
+                "created_at": "2019-11-12 17:12:51",
+                "updated_at": "2019-11-12 17:12:51",
+                "deleted_at": null
+            },
+            "tema": {
+                "id": 2,
+                "nome_tema": "green",
+                "created_at": "2019-11-12 11:02:25",
+                "updated_at": "2019-11-12 11:42:22",
+                "deleted_at": null
+            }
+        }
+    ],
+    "message": "Listagem do tema do respetivo jornal",
+    "result": "OK"
+}
+```
+
+### HTTP Request
+`GET api/temajornal`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    200 | integer |  optional  | OK -> mostra a informação
+
+<!-- END_57c54d728d3d74001178760afbf00d03 -->
+
+<!-- START_eb24aa9ad545d753d8aa45cd45319d56 -->
+## Apresentação do formulário para associar um tema a um jornal.
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/temajornal/create" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/temajornal/create");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "jornais": [
+        {
+            "id": 1,
+            "name_jornal": "Jornal da Escolas",
+            "description": "Este Jornal pertence à escola EB2\/3 de Guimarãesssss",
+            "user_id": 2,
+            "created_at": "2019-11-04 00:13:08",
+            "updated_at": "2019-11-09 21:53:25",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "name_jornal": "Noticarte",
+            "description": "Escola Secundária de Aveiro, tem alunos muito proativos",
+            "user_id": 4,
+            "created_at": "2019-11-04 00:13:45",
+            "updated_at": "2019-11-09 23:16:55",
+            "deleted_at": null
+        },
+        {
+            "id": 3,
+            "name_jornal": "Diário de uns bananas",
+            "description": "Este diário visa apresentar todas as importâncias do turismo rural de \r\nMoreira de Cónegos",
+            "user_id": 13,
+            "created_at": "2019-11-04 18:22:01",
+            "updated_at": "2019-11-04 18:22:01",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "name_jornal": "Rosa News",
+            "description": "Uma compilação de artigos  sobre a vida alheia das pessoas famosas",
+            "user_id": 18,
+            "created_at": "2019-11-04 18:43:03",
+            "updated_at": "2019-11-10 12:19:37",
+            "deleted_at": null
+        },
+        {
+            "id": 7,
+            "name_jornal": "Albergaria",
+            "description": "Secundária de Albergaria inaugorou um clube de jornalismo",
+            "user_id": 4,
+            "created_at": "2019-11-05 16:17:09",
+            "updated_at": "2019-11-05 16:17:09",
+            "deleted_at": null
+        },
+        {
+            "id": 9,
+            "name_jornal": "FiloSofá 2",
+            "description": "Leia descontraído o seu jornal",
+            "user_id": 24,
+            "created_at": "2019-11-10 12:16:41",
+            "updated_at": "2019-11-10 12:21:40",
+            "deleted_at": null
+        },
+        {
+            "id": 13,
+            "name_jornal": "Teste",
+            "description": "sdf",
+            "user_id": 24,
+            "created_at": "2019-11-12 17:12:51",
+            "updated_at": "2019-11-12 17:12:51",
+            "deleted_at": null
+        }
+    ],
+    "tema": [
+        {
+            "id": 1,
+            "nome_tema": "dark",
+            "created_at": "2019-11-12 11:02:10",
+            "updated_at": "2019-11-12 11:02:10",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "nome_tema": "green",
+            "created_at": "2019-11-12 11:02:25",
+            "updated_at": "2019-11-12 11:42:22",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "nome_tema": "rose",
+            "created_at": "2019-11-12 11:40:42",
+            "updated_at": "2019-11-12 11:40:42",
+            "deleted_at": null
+        },
+        {
+            "id": 6,
+            "nome_tema": "Sweet",
+            "created_at": "2019-11-12 14:02:33",
+            "updated_at": "2019-11-12 14:02:33",
+            "deleted_at": null
+        }
+    ],
+    "message": "Form Tema Jornal",
+    "result": "OK"
+}
+```
+
+### HTTP Request
+`GET api/temajornal/create`
+
+
+<!-- END_eb24aa9ad545d753d8aa45cd45319d56 -->
+
+<!-- START_d3c35599423f6c834e90f2b177cfdb6f -->
+## * Inserir a associação do tema ao jornal na Base de dados.
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/temajornal" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/temajornal");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/temajornal`
+
+
+<!-- END_d3c35599423f6c834e90f2b177cfdb6f -->
+
+<!-- START_d6ed9b34864e9f0d2ca88c1c589a4e8a -->
+## Apresentação de uma associação específica.
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/temajornal/1" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/temajornal/1");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 1,
+    "jornal_id": 1,
+    "tema_id": 1,
+    "created_at": "2019-11-12 12:24:35",
+    "updated_at": "2019-11-12 12:30:15",
+    "deleted_at": null
+}
+```
+
+### HTTP Request
+`GET api/temajornal/{temajornal}`
+
+
+<!-- END_d6ed9b34864e9f0d2ca88c1c589a4e8a -->
+
+<!-- START_f4f9aea103e22f92ad41ee21a685ccaf -->
+## Apresentação do formulário para editar associação.
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/temajornal/1/edit" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/temajornal/1/edit");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "temajornal": [
+        {
+            "id": 1,
+            "jornal_id": 1,
+            "tema_id": 1,
+            "created_at": "2019-11-12 12:24:35",
+            "updated_at": "2019-11-12 12:30:15",
+            "deleted_at": null
+        }
+    ],
+    "jornais": [
+        {
+            "id": 1,
+            "name_jornal": "Jornal da Escolas",
+            "description": "Este Jornal pertence à escola EB2\/3 de Guimarãesssss",
+            "user_id": 2,
+            "created_at": "2019-11-04 00:13:08",
+            "updated_at": "2019-11-09 21:53:25",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "name_jornal": "Noticarte",
+            "description": "Escola Secundária de Aveiro, tem alunos muito proativos",
+            "user_id": 4,
+            "created_at": "2019-11-04 00:13:45",
+            "updated_at": "2019-11-09 23:16:55",
+            "deleted_at": null
+        },
+        {
+            "id": 3,
+            "name_jornal": "Diário de uns bananas",
+            "description": "Este diário visa apresentar todas as importâncias do turismo rural de \r\nMoreira de Cónegos",
+            "user_id": 13,
+            "created_at": "2019-11-04 18:22:01",
+            "updated_at": "2019-11-04 18:22:01",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "name_jornal": "Rosa News",
+            "description": "Uma compilação de artigos  sobre a vida alheia das pessoas famosas",
+            "user_id": 18,
+            "created_at": "2019-11-04 18:43:03",
+            "updated_at": "2019-11-10 12:19:37",
+            "deleted_at": null
+        },
+        {
+            "id": 7,
+            "name_jornal": "Albergaria",
+            "description": "Secundária de Albergaria inaugorou um clube de jornalismo",
+            "user_id": 4,
+            "created_at": "2019-11-05 16:17:09",
+            "updated_at": "2019-11-05 16:17:09",
+            "deleted_at": null
+        },
+        {
+            "id": 9,
+            "name_jornal": "FiloSofá 2",
+            "description": "Leia descontraído o seu jornal",
+            "user_id": 24,
+            "created_at": "2019-11-10 12:16:41",
+            "updated_at": "2019-11-10 12:21:40",
+            "deleted_at": null
+        },
+        {
+            "id": 13,
+            "name_jornal": "Teste",
+            "description": "sdf",
+            "user_id": 24,
+            "created_at": "2019-11-12 17:12:51",
+            "updated_at": "2019-11-12 17:12:51",
+            "deleted_at": null
+        }
+    ],
+    "tema": [
+        {
+            "id": 1,
+            "nome_tema": "dark",
+            "created_at": "2019-11-12 11:02:10",
+            "updated_at": "2019-11-12 11:02:10",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "nome_tema": "green",
+            "created_at": "2019-11-12 11:02:25",
+            "updated_at": "2019-11-12 11:42:22",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "nome_tema": "rose",
+            "created_at": "2019-11-12 11:40:42",
+            "updated_at": "2019-11-12 11:40:42",
+            "deleted_at": null
+        },
+        {
+            "id": 6,
+            "nome_tema": "Sweet",
+            "created_at": "2019-11-12 14:02:33",
+            "updated_at": "2019-11-12 14:02:33",
+            "deleted_at": null
+        }
+    ],
+    "message": "Form Tema Jornal para editar associação",
+    "result": "OK"
+}
+```
+
+### HTTP Request
+`GET api/temajornal/{temajornal}/edit`
+
+
+<!-- END_f4f9aea103e22f92ad41ee21a685ccaf -->
+
+<!-- START_2548cc969b770479c898f1b5da2dde2b -->
+## Atualização de uma associação específica
+
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/temajornal/1?jornal_id=aliquam&tema_id=enim" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/temajornal/1");
+
+    let params = {
+            "jornal_id": "aliquam",
+            "tema_id": "enim",
+        };
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT api/temajornal/{temajornal}`
+
+`PATCH api/temajornal/{temajornal}`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    jornal_id |  required  | Saber qual é o jornal
+    tema_id |  required  | Saber qual é o tema
+
+<!-- END_2548cc969b770479c898f1b5da2dde2b -->
+
+<!-- START_6d9c53ddd19a5287cb34b7ad98adabd5 -->
+## Remove the specified resource from storage.
+
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/temajornal/1" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/temajornal/1");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/temajornal/{temajornal}`
+
+
+<!-- END_6d9c53ddd19a5287cb34b7ad98adabd5 -->
 
 

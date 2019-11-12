@@ -14,7 +14,10 @@
         
     }
 </script> -->
-    <nav class="navbar_jornal_news navbar navbar-expand-lg ">
+    @foreach ($temajornals as $temajornal)
+    @if($temajornal->jornal_id === $jornais->id)
+    
+    <nav class="nav_{{$temajornal->tema->nome_tema}} navbar navbar-expand-lg ">
         <a class="navbar-brand" href="{{ url('listarnewsjornal/'.$jornais->id) }}">{{$jornais->name_jornal}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,12 +32,15 @@
                 @endif
                 @endforeach
                 @endforeach
-                <a style="color:grey" class="nav-item nav-link" href="{{url('lista_jornais')}}">
+                <a style="color:#afafaf" class="nav-item nav-link" href="{{url('lista_jornais')}}">
                     Voltar a ver Jornais </p><span class="sr-only">(current)</span>
                 </a>
             </div>
         </div>
     </nav>
+    
+    @endif
+    @endforeach
 
     <!-- <div class="row">
         <a href="/" class="btn btn-xs btn-info pull-right">

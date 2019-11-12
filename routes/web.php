@@ -85,6 +85,26 @@ Route::group(
         Route::get('/insert-editarimagem', 'ContentImageController@form')->name('editarimagem-form');
         Route::post('/insert-editarimagem', 'ContentImageController@store')->name('insert-editarimagem');
         Route::get('/editarimagem-img/{content_image}', 'ContentImageController@show')->name('editarimagem-img');
+    
+        /**
+         * API tema
+         */
+
+        Route::get('/lista_tema', 'TemaController@index')->name('lista_tema');
+        Route::get('/insert-tema', 'TemaController@create')->name('tema-form');
+        Route::get('/editar-tema/{tema}', 'TemaController@edit')->name('updatetema-form');
+        Route::get('/elima-tema/{tema}', 'TemaController@destroy')->name('delete-temaform');
+        
+
+        /**
+         * API TemaJornal
+         */
+
+        Route::get('/lista_temajornal', 'TemaJornalController@index')->name('lista_temajornal');
+        Route::get('/insert-temajornal', 'TemaJornalController@create')->name('temajornal-form');
+        Route::get('/editar-temajornal/{temajornal}', 'TemaJornalController@edit')->name('updatetemajornal-form');
+        Route::get('/elima-temajornal/{temajornal}', 'TemaJornalController@destroy')->name('delete-temajornalform');
+
     }
 );
 /**
@@ -119,6 +139,32 @@ Route::group(
          */
         Route::get('/editar-conteudo/{conteudo}', 'ConteudoController@formupdate')->name('updateconteudo-form');
         Route::put('/conteudo/{conteudo}/edit', 'ConteudoController@update')->name('update-conteudo');
+   
+        /**
+         * API tema
+         */
+
+        //Route::get('/lista_tema', 'TemaController@index')->name('lista_tema');
+        //Route::get('/insert-tema', 'TemaController@create')->name('tema-form');
+        Route::post('/insert-tema', 'TemaController@store')->name('insert-tema');
+        //Route::get('/editar-tema/{tema}', 'TemaController@edit')->name('updatetema-form');
+        Route::put('/tema/{tema}/edit', 'TemaController@update')->name('update-tema');
+        //Route::get('/elima-tema/{tema}', 'TemaController@destroy')->name('delete-temaform');
+        Route::delete('/elima-tema/{tema}', 'TemaController@destroy')->name('delete-tema');
+
+        /**
+         * API tema
+         */
+
+        //Route::get('/lista_temajornal', 'TemaJornalController@index')->name('lista_temajornal');
+        //Route::get('/insert-temajornal', 'TemaJornalController@create')->name('temajornal-form');
+        Route::post('/insert-temajornal', 'TemaJornalController@store')->name('insert-temajornal');
+        // Route::get('/editar-temajornal/{temajornal}', 'TemaJornalController@edit')->name('updatetemajornal-form');
+        Route::put('/temajornal/{temajornal}/edit', 'TemaJornalController@update')->name('update-temajornal');
+        //Route::get('/elima-temajornal/{temajornal}', 'TemaJornalController@destroy')->name('delete-temajornalform');
+        Route::delete('/elima-temajornal/{temajornal}', 'TemaJornalController@destroy')->name('delete-temajornal');
+
+   
     }
 );
 

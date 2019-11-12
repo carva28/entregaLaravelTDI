@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\NoticiaStoreRequest;
 use App\Http\Requests\NoticiaUpdateRequest;
+use App\TemaJornal;
 
 /**
  * @group API da Noticia
@@ -138,19 +139,8 @@ class NoticiaController extends Controller
 
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'titulo_noticia' => 'required|string|max:60',
-            'corpo_noticia' => 'required|string|max:255',
-            'jornal_id' => 'required|exists:jornals,id',
-            'seccao_id' => 'required|exists:seccaos,id',
-            'user_id' => 'required|exists:users,id',
-        ]);
-        if ($validator->fails()) {
-            return $validator->errors()->all();
-        }
         $noticium->update($data);
 
-        //return response($noticium);
         return redirect()->route('lista_noticia', 200);
     }
 
@@ -190,7 +180,8 @@ class NoticiaController extends Controller
     {
         $noticia = DB::table('noticias')->where('jornal_id', $id)->whereNull('deleted_at')->get();
         $secjornal = Noticia::with('seccao')->select('seccao_id')->distinct()->where('jornal_id', $id)->get();
-
+        $temajornal = TemaJornal::with('tema')->where('jornal_id', $id)->get();
+        
         $jornal = Jornal::find($id);
         $seccao = Seccao::all();
         $users = User::all();
@@ -201,7 +192,8 @@ class NoticiaController extends Controller
             ->with('seccaos', $seccao)
             ->with('users', $users)
             ->with('conteudos', $conteudo)
-            ->with('secjornals', $secjornal);
+            ->with('secjornals', $secjornal)
+            ->with('temajornals',$temajornal);
     }
 
     public function jornalseccao($idSeccao, $idJornal)

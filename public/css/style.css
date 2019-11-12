@@ -8982,9 +8982,20 @@ a:hover {
   text-align: center;
 }
 
-.btnsubmeterseccao:hover, btnsubmeterseccao:active, btnsubmeterseccao:link {
+.btnsubmeterseccao:hover,.btnsubmeterseccao2:hover, btnsubmeterseccao:active, btnsubmeterseccao:link {
   background-color: rgba(238, 174, 202, 0.4);
   color: black;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+.btnsubmeterseccao2 {
+  background-color: rgb(170, 111, 137);
+  color: white;
   padding: 0.375rem 0.75rem;
   border: 1px solid transparent;
   font-size: 0.9rem;
@@ -9673,6 +9684,64 @@ border-left: 1px solid #2f2f2f;
   font-style: italic;
   box-sizing: border-box;
   padding: 10px 0 10px 0;
+}
+
+/************************/
+/***********************/
+/*************************/
+/***********************/
+/***Mudar navbar ***/
+
+.nav_green {
+  background-color: #60fdb4 !important;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px #60fdb46e;
+  margin-bottom: 30px;
+}
+.nav_green, .navbar_jornal_news, .navbar-brand {
+  color: black;
+  transition: 0.3s;
+}
+.nav_green ,.navbar-nav a {
+  color:black;
+}
+
+.nav_green ,.navbar-nav a:hover {
+  color:rgb(197, 197, 197);
+}
+.nav_dark {
+  background-color: #3f3f3f !important;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px #686868;
+  margin-bottom: 30px;
+  color:whitesmoke;
+}
+
+.nav_dark .navbar_jornal_news, .navbar-brand{
+  color:whitesmoke;
+}
+
+.nav_dark .navbar-nav a {
+  color:whitesmoke;
+}
+
+.nav_dark .navbar-nav a:hover {
+  color:rgb(197, 197, 197);
+}
+
+.nav_dark #headertitle{
+  background-color: #3f3f3f;
+
+}
+
+.nav_rose {
+  background-color: mistyrose !important;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px rgb(255, 210, 205);
+  margin-bottom: 30px;
 }
 
 @media screen and (max-width: 600px) {
