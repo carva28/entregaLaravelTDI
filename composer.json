@@ -9,6 +9,7 @@
     "license": "MIT",
 
     "require": {
+        "ext-gd": "*",
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
@@ -24,8 +25,8 @@
         "mockery/mockery": "^1.0",
         "mpociot/laravel-apidoc-generator": "^3.17",
         "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0",
-        "ext-gd": "*"
+        "phpunit/phpunit": "^8.0"
+        
     },
     "config": {
         "optimize-autoloader": true,
