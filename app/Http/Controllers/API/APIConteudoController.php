@@ -63,8 +63,6 @@ class APIConteudoController extends Controller
 
     /**
      * Inserir conteúdos na Base de dados.
-     * Faz redirect da rota se armazenar os conteúdos corretamente 
-     * esta verificação é realizada pelo http code 201
      * 
      * @bodyParam  tipo_conteudo string required necessário associar se é Audio, Video, ou Imagem
      * @bodyParam  ficheiro_conteudo string required o ficheiro para realizar upload do conteúdo em vários formatos(mpga,mp3,mp4,avi,jpg,jpeg,png,gif)

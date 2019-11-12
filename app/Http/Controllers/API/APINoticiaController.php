@@ -68,8 +68,6 @@ class APINoticiaController extends Controller
 
     /**
      * Inserir uma notícia na Base de dados.
-     * Faz redirect da rota se armazenar os dados corretamente esta 
-     * verificação é realizada pelo http code 201
      * 
      * @bodyParam  titulo_noticia string required necessário ter um nome para a notícia
      * @bodyParam  corpo_noticia string required necessário ter um corpo de notícia
@@ -103,7 +101,7 @@ class APINoticiaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Apresentação de uma notícia específica.
      *
      * @param  \App\Noticia  $noticia
      * @return \Illuminate\Http\Response
@@ -150,11 +148,18 @@ class APINoticiaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * Atualização de uma noticia específica 
+     *  Ao editar uma notícia presente no feed, é enviado o ID especifico do mesmo, nessa 
+     * ligação, a função formupdate irá associar o id da notícia apresentando toda a informação 
+     * sobre a mesma
+     * @queryParam titulo_noticia required Título da notícia
+     * @queryParam corpo_noticia required Corpo da notícia
+     * @queryParam jornal_id required Jornal da respetiva notícia
+     * @queryParam seccao_id required Secção da respetiva notícia
+     * @queryParam user_id required Repórter da notícia
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Noticia  $noticia
-     * @return \Illuminate\Http\Response
+     * @param  \App\Noticia $noticia
+     * @return \Illuminate\Http\Response 
      */
     public function update(APINoticiaUpdateRequest $request, Noticia $noticium)
     {
@@ -166,9 +171,12 @@ class APINoticiaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar uma notícia específica
+     * 
+     * Ao clique no botão de eliminar notícia, o ID dessa mesma irá  
+     * ser eliminado da base de dados
      *
-     * @param  \App\Noticia  $noticia
+     * @param  \App\Noticia  $noticias
      * @return \Illuminate\Http\Response
      */
     public function destroy(Noticia $noticium)

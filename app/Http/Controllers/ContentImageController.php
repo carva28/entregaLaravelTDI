@@ -140,9 +140,15 @@ class ContentImageController extends Controller
      * @param  \App\ContentImage  $contentImage
      * @return \Illuminate\Http\Response
      */
-    public function show(ContentImage $contentImage)
-    {
-        //
+    public function show($contentImage)
+    {   
+        $jornal = Jornal::all();
+        $image = ContentImage::find($contentImage);
+        
+        return view('editarimagem-img')->
+        with('conteudoeditados',$image)
+        ->with('conteudoeditadoImage',$image->ficheiro_image)
+        ->with('jornais',$jornal);
     }
 
     /**

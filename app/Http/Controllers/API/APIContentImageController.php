@@ -8,10 +8,28 @@ use App\Http\Controllers\Controller;
 use App\Jornal;
 use App\Http\Requests\APIContentImageStoreRequest;
 use Image;
+
+/**
+ * @group API da edição de fotografias 
+ * 
+ * APIs para editar e ver fotografias
+ * 
+ */
 class APIContentImageController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:guest|reporter|editor|admin')->only(['index']);
+        $this->middleware('role:editor|admin')->only(['form','store','formupdate','update']);
+        $this->middleware('role:admin')->only(['formdelete','destroy']);
+    }
     /**
-     * Display a listing of the resource.
+     * Apresentação das imagens editadas
+     * Interpretação ver as imagens que já foram editadas limitas a número de páginas
+     * HTTP Response
+     * @bodyParam 200 integer OK -> mostra a informação
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,7 +45,7 @@ class APIContentImageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Formulário para inserir uma imagem editada
      *
      * @return \Illuminate\Http\Response
      */
@@ -44,20 +62,43 @@ class APIContentImageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Inserir uma imagem editada na Base de dados.
      *
+     * 
+     * @bodyParam  ficheiro_image string required Enviar a Image
+     * @bodyParam  jornal_id number required Enviar o jornal
+     * @bodyParam  effectvalue string required Enviar valor do efeito para colocar na Image
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(APIContentImageStoreRequest $request)
     {
         if ($request->hasFile('ficheiro_image')) {
+
+
             $data = $request->all();
+
             $file = $request->file('ficheiro_image')->store('imagens_editadas');
+
             $imagemeditada = 'uploads/' . $file;
-            $img = Image::make($imagemeditada)->resize(200, 200)->greyscale()->brightness(60);
+            if ($data["effectvalue"] === "grey") {
+                $img = Image::make($imagemeditada)->greyscale();
+            } else if ($data["effectvalue"] === "contrast200") {
+                $img = Image::make($imagemeditada)->contrast(100);
+            } else if ($data["effectvalue"] === "briho130") {
+                $img = Image::make($imagemeditada)->brightness(20);
+            } else if ($data["effectvalue"] === "briho80") {
+                $img = Image::make($imagemeditada)->brightness(-40);
+            } else if ($data["effectvalue"] === "greybrightness20") {
+                $img = Image::make($imagemeditada)->brightness(30)->greyscale();
+            } else if ($data["effectvalue"] === "none") {
+                $img = Image::make($imagemeditada)->brightness(0);
+            }
+
             $img->save($imagemeditada);
+
             $urlImg = $img->basename;
+
             $imagenseditadas = ContentImage::create(
                 [
                     'ficheiro_image' => $urlImg,
@@ -69,24 +110,26 @@ class APIContentImageController extends Controller
                 'message' => 'Imagem editada com sucesso foi adicionada',
                 'result' => 'OK'
             ];
-
             return response($response, 201);
         }
     }
 
     /**
-     * Display the specified resource.
+     * Apresentação de uma imagem editada específica.
      *
+     * @bodyParam  conteudoeditados array required Envia imagem, o id do jornal e data de criação
      * @param  \App\ContentImage  $contentImage
      * @return \Illuminate\Http\Response
      */
     public function show(ContentImage $contentImage)
     {
-        //
+        $image = ContentImage::find($contentImage)->with('jornais');
+        return view('editarimagem-img')->
+        with('conteudoeditados',$image);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Não atualiza
      *
      * @param  \App\ContentImage  $contentImage
      * @return \Illuminate\Http\Response
@@ -97,7 +140,7 @@ class APIContentImageController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Não atualiza
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\ContentImage  $contentImage
@@ -109,7 +152,9 @@ class APIContentImageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar uma imagem editada específica
+     * 
+     * Não elimina 
      *
      * @param  \App\ContentImage  $contentImage
      * @return \Illuminate\Http\Response

@@ -9,7 +9,7 @@ use App\Http\Requests\APISeccaoStoreRequest;
 use App\Http\Requests\APISeccaoUpdateRequest;
 
 /**
- * @group API do Jornal 
+ * @group API do Secção 
  * 
  * APIs para gerir secções
  * 
@@ -53,8 +53,7 @@ class APISeccaoController extends Controller
 
     /**
      * Inserir uma secção na Base de dados.
-     * Faz redirect da rota se armazenar os dados corretamente esta verificação é realizada
-     * pelo http code 201
+     * 
      * 
      * @bodyParam  nome_seccao string  required necessário ter um nome para a secção
      * @bodyParam  imagem_seccao string required necessário ter uma imagem

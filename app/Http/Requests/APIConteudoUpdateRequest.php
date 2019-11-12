@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+
 class APIConteudoUpdateRequest extends FormRequest
 {
     /**
@@ -30,7 +31,8 @@ class APIConteudoUpdateRequest extends FormRequest
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'nome_seccao.required' => 'é necessário ter um nome',
             'nome_seccao.unique' => 'é necessário ter um nome único',
@@ -43,10 +45,11 @@ class APIConteudoUpdateRequest extends FormRequest
         throw new HttpResponseException(
             response()->json(
                 [
-                    'data'=> $validator->errors(),
+                    'data' => $validator->errors(),
                     'msg' => 'Erro, tente de novo'
-                ], 422
+                ],
+                422
             )
-                );
+        );
     }
 }

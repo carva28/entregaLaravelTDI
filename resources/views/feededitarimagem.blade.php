@@ -31,7 +31,7 @@
         <div class="colun_edit col-sm">
             <img class="editphotos img-fluid" src="uploads/imagens_editadas/{{$imagenseditada->ficheiro_image}}" />
             <h5 class="card-title">{{$jornal->name_jornal}}</h5>
-            <a href="{{ url('editarimagem-img/'.$imagenseditada->id) }}" class="btn_editar btn btn-primary">Editar</a>
+            <a href="{{ url('editarimagem-img/'.$imagenseditada->id) }}" class="btn_editar btn btn-primary">Ver</a>
         </div>
         @endif
         @endforeach

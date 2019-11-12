@@ -74,8 +74,6 @@ class APIJornalController extends Controller
 
     /**
      * Inserir uma notícia na Base de dados.
-     * Faz redirect da rota se armazenar os dados corretamente esta 
-     * verificação é realizada pelo http code 201
      * 
      * @bodyParam  name_jornal string required Dar um nome criativo ao Jornal
      * @bodyParam  description string required necessário ter uma descrição associada ao Jornal

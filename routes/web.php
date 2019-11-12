@@ -84,6 +84,7 @@ Route::group(
         Route::get('/lista_editarimagem', 'ContentImageController@index')->name('lista_editarimagem');
         Route::get('/insert-editarimagem', 'ContentImageController@form')->name('editarimagem-form');
         Route::post('/insert-editarimagem', 'ContentImageController@store')->name('insert-editarimagem');
+        Route::get('/editarimagem-img/{content_image}', 'ContentImageController@show')->name('editarimagem-img');
     }
 );
 /**

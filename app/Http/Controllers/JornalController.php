@@ -22,13 +22,7 @@ class JornalController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     // $this->middleware('auth');
-    //     $this->middleware('role:guest|reporter|editor|admin')->only(['index']);
-    //     $this->middleware('role:editor|admin')->only(['form','store','formupdate','update']);
-    //     $this->middleware('role:admin')->only(['formdelete','destroy']);
-    // }
+    
     /**
      * Apresentação dos jornais associados aos editores.
      * Interpretação de quem pertence o jornal
@@ -41,7 +35,8 @@ class JornalController extends Controller
     {
         //return Jornal::all();
 
-        $jornal = Jornal::with('user')->get();
+        //$jornal = Jornal::with('user')->get();
+        $jornal = Jornal::with('user') ->paginate(2);
         $userID = $request->user();
 
         $response = [
@@ -54,7 +49,9 @@ class JornalController extends Controller
 
         //return response($response, 200);
 
-        return view('feedjornal')
+        return view('feedjornal', [
+            'body_class' => 'bg-blue'
+         ])
             ->with('jornais', $jornal)->with('userauth', $userID);
     }
 
@@ -73,7 +70,7 @@ class JornalController extends Controller
         }
     }
     /**
-     * Inserir uma notícia na Base de dados.
+     * Inserir um jornal na Base de dados.
      * Faz redirect da rota se armazenar os dados corretamente esta 
      * verificação é realizada pelo http code 201
      * 

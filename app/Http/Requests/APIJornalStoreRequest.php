@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+
 class APIJornalStoreRequest extends FormRequest
 {
     /**
@@ -30,7 +31,8 @@ class APIJornalStoreRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
         ];
     }
-    public function messages(){
+    public function messages()
+    {
         return [
             'name_jornal.required' => 'é necessário ter um nome',
             'name_jornal.unique' => ' Esse nome já existe',
@@ -44,11 +46,11 @@ class APIJornalStoreRequest extends FormRequest
         throw new HttpResponseException(
             response()->json(
                 [
-                    'data'=> $validator->errors(),
+                    'data' => $validator->errors(),
                     'msg' => 'Erro, tente de novo'
-                ], 422
-                
+                ],
+                422
             )
-                );
+        );
     }
 }
