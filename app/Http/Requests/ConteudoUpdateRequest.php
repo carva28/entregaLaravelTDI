@@ -34,9 +34,9 @@ class ConteudoUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'tipo_conteudo.required' => 'é necessário ter um tipo de conteudo',
-            'noticia_id.required' => 'é necessário saber qual é o jornal',
-            'user_id.required' => 'É necessário saber quem é o responsável pela noticia '
+            'tipo_conteudo' => 'é necessário ter um tipo de conteudo',
+            'noticia_id' => 'é necessário saber qual é o jornal',
+            'user_id' => 'É necessário saber quem é o responsável pela noticia '
         ];
     }
 }

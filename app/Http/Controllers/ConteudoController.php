@@ -184,16 +184,20 @@ class ConteudoController extends Controller
         // }
 
         $userID = $request->user()->id;
-        $conteudo->update($data);
+        // $conteudo->update($data);
         $todoscontents = Conteudo::with('noticia')->where('user_id', $userID)->get();
         $response = [
             'data' => $todoscontents,
             'message' => 'Conteudo editado',
             'result' => 'OK'
         ];
-        return view('feedconteudo')
-            ->with('conteudos', $response['data'])->with('messages', $response['message']);
+        // return view('feedconteudo')
+        //     ->with('conteudos', $response['data'])->with('messages', $response['message']);
+        $data = $request->all();
 
+        $conteudo->update($data);
+        return view('feedconteudo')->with('conteudos', $response['data'])->with('messages', $response['message']);
+        return redirect()->route('lista_conteudo');
         //return response($conteudo);
     }
 
